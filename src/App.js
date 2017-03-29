@@ -49,7 +49,7 @@ export default class App extends Component {
             <Navigator
                 initialRoute={{name: CARDS_SCREEN}}
                 renderScene={this.renderScene}
-                configureScene={() => {return Navigator.SceneConfigs.FloatFromRight}}
+                configureScene={() => {return Navigator.SceneConfigs.PushFromRight}}
             />
         )
     }

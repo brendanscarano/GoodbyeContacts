@@ -2,18 +2,15 @@ import React, { PropTypes } from 'react';
 import { View, Text } from 'react-native';
 import Emoji from 'react-native-emoji';
 import { possibleYesBlocks, possibleDeniedBlocks } from '../../data/messages';
-console.log("possibleYesBlocks", possibleYesBlocks);
-console.log("possibleDeniedBlocks", possibleDeniedBlocks);
 
 export default function Message(props) {
-    const messageToRender = props.wasApproved
-        ? randomNumber(possibleYesBlocks)
-        : randomNumber(possibleDeniedBlocks);
-
+    // console.log("props", props);
     return (
-        <View >
-            <Text>{messageToRender.text}</Text>
-            <Text style={{fontSize: 50}}><Emoji name={messageToRender.emoji}/></Text>
+        <View>
+            <Text>{props.messageObject.text}</Text>
+            <Text style={{fontSize: 50}}>
+                <Emoji name={props.messageObject.emoji}/>
+            </Text>
         </View>
     )
 }

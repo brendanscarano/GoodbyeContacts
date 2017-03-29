@@ -29,10 +29,10 @@ const styles = StyleSheet.create({
     borderColor: 'green',
     borderWidth: 2,
     position: 'absolute',
+    top: 40,
+    alignSelf: 'center',
     padding: 20,
-    bottom: 20,
     borderRadius: 5,
-    right: 20,
   },
   yupText: {
     fontSize: 16,
@@ -42,10 +42,10 @@ const styles = StyleSheet.create({
     borderColor: 'red',
     borderWidth: 2,
     position: 'absolute',
-    bottom: 20,
+    top: 40,
+    alignSelf: 'center',
     padding: 20,
     borderRadius: 5,
-    left: 20,
   },
   nopeText: {
     fontSize: 16,
@@ -449,9 +449,10 @@ export default class SwipeCards extends Component {
   render() {
     return (
       <View style={styles.container}>
-        {this.props.stack ? this.renderStack() : this.renderCard()}
         {this.renderNope()}
         {this.renderYup()}
+        <Text>Choose the fate of:</Text>
+        {this.props.stack ? this.renderStack() : this.renderCard()}
       </View>
     );
   }

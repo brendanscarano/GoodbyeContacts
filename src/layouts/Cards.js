@@ -6,15 +6,21 @@ import {
     Image,
     ActivityIndicator
 } from 'react-native';
-import SwipeCards from '../react-native-swipe-cards/SwipeCards';
+// import SwipeCards from '../react-native-swipe-cards/SwipeCards';
+import SwipeCards from '../components/SwipeCards';
+import { possibleYesBlocks, possibleDeniedBlocks } from '../data/messages';
+
 import NavigationBar from 'react-native-navbar';
+// import NavBar from '../components/NavBar';
 import Card from '../components/Card';
 import Message from '../components/Message';
 const DELETE_CONTACTS_SCREEN = 'DELETE_CONTACTS_SCREEN';
 
 export default class Cards extends Component {
     state = {
-        contactsToDelete: []
+        contactsToDelete: [],
+        yesBlock: {},
+        noBlock: {},
     }
 
     // componentDidMount() {
@@ -23,14 +29,19 @@ export default class Cards extends Component {
 
     // shouldComponentUpdate(nextProps, nextState) {
     //     console.log("nextState", nextState);
+    //     if(this.state.contactsToDelete.length === 0) {
+    //         return true;
+    //     }
     //     if(this.state.contactsToDelete.length !== nextState.contactsToDelete.length) {
-    //         return false;
+    //         return true;
     //     }
 
-    //     return true;
+    //     return false;
     // }
 
-    handleNope = (card) => this.setState({ contactsToDelete: [...this.state.contactsToDelete, card] })
+    handleNope = (card) => this.setState({
+        contactsToDelete: [...this.state.contactsToDelete, card]
+    })
 
     render() {
         // console.log('this.props in render', this.props)
@@ -39,6 +50,10 @@ export default class Cards extends Component {
             <View style={styles.container}>
                 <NavigationBar
                     title={{title: 'Contacts'}}
+                    style={{
+                        borderBottomWidth: 1,
+                        borderBottomColor: '#ccc'
+                    }}
                     rightButton={{
                         title: `Delete ${this.state.contactsToDelete.length}`,
                         handler: () =>
@@ -50,14 +65,24 @@ export default class Cards extends Component {
                             })
                     }}
                 />
-                <SwipeCards
+                {/*<SwipeCards
                     cards={this.props.data}
                     renderCard={cardData => <Card {...cardData} />}
                     renderNoMoreCards={() => <NoMoreCards />}
-                    handleYup={this.handleYup}
                     handleNope={cardData => this.handleNope(cardData)}
                     yupView={<Message wasApproved />}
                     noView={<Message />}
+                    yupStyle={{
+                        position: 'absolute',
+                        top: 0,
+                    }}
+                />*/}
+                <SwipeCards
+                    data={this.props.data}
+                    renderCard={cardData => <Card {...cardData} />}
+                    handleNope={cardData => this.handleNope(cardData)}
+                    randomYes={randomNumber(possibleYesBlocks)}
+                    randomNo={randomNumber(possibleDeniedBlocks)}
                 />
             </View>
             : <Loading />
@@ -65,12 +90,16 @@ export default class Cards extends Component {
     }
 }
 
-function NoMoreCards() {
-    return (
-        <View>
-            <Text>There are no more contacts left, Goodbye!</Text>
-        </View>
-    )
+// function NoMoreCards() {
+//     return (
+//         <View>
+//             <Text>There are no more contacts left, Goodbye!</Text>
+//         </View>
+//     )
+// }
+
+function randomNumber(array) {
+    return array[Math.floor(Math.random() * array.length)];
 }
 
 function Loading() {
@@ -85,8 +114,6 @@ function Loading() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        borderWidth: 2,
-        borderColor: 'red',
     },
     innerContainer: {
         flex: 1,

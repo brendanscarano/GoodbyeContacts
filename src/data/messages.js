@@ -10,10 +10,11 @@ const possibleDeniedBlocks = [
   {text: 'Goodbye', emoji: 'wave'},
   {text: 'Addio', emoji: 'flag-it'},
   {text: 'Au Revoir', emoji: 'flag-fr'},
-  {text: 'Hasta la vista, Baby', emoji: 'robot'},
+  {text: 'Hasta la vista, Baby', emoji: 'robot_face'},
   {text: 'So long, King Bowser!', emoji: 'mushroom'},
   {text: 'Say goodnight to the bad guy', emoji: 'gun'},
-  {text: 'Long live, the king!', emoji: 'lion'},
+  {text: 'Long live, the king!', emoji: 'lion_face'},
+  {text: 'That strings!', emoji: 'scorpion'},
 ]
 
 export {

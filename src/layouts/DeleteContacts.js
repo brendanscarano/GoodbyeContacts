@@ -1,13 +1,19 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableHighlight } from 'react-native';
 import NavigationBar from 'react-native-navbar';
+import List from '../components/List';
+import Contacts from 'react-native-contacts';
+import Contact from '../components/Contact';
 
 export default function DeleteContacts(props) {
     console.log("props", props);
     return (
         <View style={styles.container}>
             <NavigationBar
-                title={{title: 'Delete Contacts'}}
+                style={{
+                    borderBottomWidth: 1,
+                    borderBottomColor: '#ccc'
+                }}
                 leftButton={{
                     title: 'Back',
                     handler: () =>props.navigator.pop()
@@ -15,16 +21,41 @@ export default function DeleteContacts(props) {
             />
             <Button
                 numberOfContacts={props.contactsToDelete.length}
+                onPress={() => deleteContacts(props.contactsToDelete)}
             />
-            {props.contactsToDelete.map(contact => {
-                const fullName = `${contact.givenName} ${contact.familyName || ''}`;
-                return (
-                    <View style={styles.contact} key={contact.recordID}>
-                        <Text>{fullName}</Text>
-                    </View>
-                )
-            })}
+            <List
+                data={props.contactsToDelete}
+                listItemToRender={Contact}
+            />
         </View>
+    )
+}
+
+function deleteContacts(contacts) {
+    contacts.forEach(contact => {
+        Contacts.deleteContact({
+            recordID: contact.recordID
+        }, err => {console.log(err)});
+    })
+
+    Contacts.getAll((err, contacts) => {
+      if(err && err.type === 'permissionDenied'){
+        // x.x
+      } else {
+        console.log('contacts', contacts)
+      }
+    })
+}
+
+function Button(props) {
+    const text = props.numberOfContacts === 1 ? 'Contact' : 'Contacts';
+    return (
+        <TouchableHighlight
+            style={styles.buttonWrapper}
+            onPress={props.onPress}
+        >
+            <Text style={styles.buttonText}>{`Delete ${props.numberOfContacts} ${text}`}</Text>
+        </TouchableHighlight>
     )
 }
 
@@ -50,17 +81,5 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 16,
     },
-    contact: {
-        borderBottomWidth: 1,
-        borderBottomColor: '#ccc',
-    }
 })
 
-function Button(props) {
-    const text = props.numberOfContacts === 1 ? 'Contact' : 'Contacts';
-    return (
-        <View style={styles.buttonWrapper}>
-            <Text style={styles.buttonText}>{`Delete ${props.numberOfContacts} ${text}`}</Text>
-        </View>
-    )
-}
