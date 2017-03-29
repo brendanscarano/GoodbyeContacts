@@ -25,7 +25,8 @@ export default function DeleteContacts(props) {
             />
             <List
                 data={props.contactsToDelete}
-                listItemToRender={<Contact {...props} />}
+                listItemToRender={Contact}
+                parentData={props}
             />
         </View>
     )

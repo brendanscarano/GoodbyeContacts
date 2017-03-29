@@ -11,7 +11,7 @@ export default function Contact(props) {
             <Text style={styles.name}>{fullName}</Text>
             <TouchableHighlight
                 style={styles.cancel}
-                onPress={() => console.log('testing')}
+                onPress={(item) => props.removeContactToBeDelete(props.item)}
             >
                 <Text>X</Text>
             </TouchableHighlight>

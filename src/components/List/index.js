@@ -26,9 +26,11 @@ export default class List extends Component {
 
     renderRow = (item) => {
         const Component = this.props.listItemToRender;
+        console.log('this.props in render row', this.props)
         console.log("Component", Component);
         return (
             <Component
+                {...this.props.parentData}
                 item={item}
                 navigator={this.props.navigator}
                 route={this.props.route}
