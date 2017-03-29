@@ -14,7 +14,8 @@ const DELETE_CONTACTS_SCREEN = 'DELETE_CONTACTS_SCREEN';
 
 export default class App extends Component {
     state = {
-        contacts: []
+        contacts: [],
+        contactsToDelete: [],
     }
 
     componentDidMount() {
@@ -27,18 +28,30 @@ export default class App extends Component {
         })
     }
 
+    handleNope = (card) => this.setState({
+        contactsToDelete: [...this.state.contactsToDelete, card]
+    })
+
+    removeContactToBeDelete(contactToRemove) {
+        console.log('remove contact to be deleted...')
+        console.log("contactToRemove", contactToRemove);
+    }
+
     renderScene = (route, navigator) => {
         if (route.name === CARDS_SCREEN) {
             return <Cards
                         navigator={navigator}
                         route={route}
                         data={this.state.contacts}
+                        contactsToDelete={this.state.contactsToDelete}
+                        handleNope={this.handleNope}
                     />
         }
         if (route.name === DELETE_CONTACTS_SCREEN) {
             return <DeleteContacts
                         navigator={navigator}
                         route={route}
+                        removeContactToBeDelete={this.removeContactToBeDelete}
                         {...route.passProps}
                     />
         }

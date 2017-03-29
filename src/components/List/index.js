@@ -26,6 +26,7 @@ export default class List extends Component {
 
     renderRow = (item) => {
         const Component = this.props.listItemToRender;
+        console.log("Component", Component);
         return (
             <Component
                 item={item}

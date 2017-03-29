@@ -35,9 +35,9 @@ export default class SwipeCardsWrapper extends Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        console.log('this.state', this.state)
-        console.log("nextProps", nextProps);
-        return false;
+        // console.log('this.state', this.state)
+        // console.log("nextProps", nextProps);
+        return true;
     }
 
     render() {

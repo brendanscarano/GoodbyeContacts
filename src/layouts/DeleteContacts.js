@@ -16,7 +16,7 @@ export default function DeleteContacts(props) {
                 }}
                 leftButton={{
                     title: 'Back',
-                    handler: () =>props.navigator.pop()
+                    handler: () => props.navigator.pop()
                 }}
             />
             <Button
@@ -25,7 +25,7 @@ export default function DeleteContacts(props) {
             />
             <List
                 data={props.contactsToDelete}
-                listItemToRender={Contact}
+                listItemToRender={<Contact {...props} />}
             />
         </View>
     )

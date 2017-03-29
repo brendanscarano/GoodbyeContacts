@@ -1,3 +1,4 @@
+// DOESNT HAVE TO BE A CLASS!!!
 import React, { Component } from 'react';
 import {
     StyleSheet,
@@ -6,42 +7,22 @@ import {
     Image,
     ActivityIndicator
 } from 'react-native';
-// import SwipeCards from '../react-native-swipe-cards/SwipeCards';
 import SwipeCards from '../components/SwipeCards';
 import { possibleYesBlocks, possibleDeniedBlocks } from '../data/messages';
 
 import NavigationBar from 'react-native-navbar';
-// import NavBar from '../components/NavBar';
 import Card from '../components/Card';
 import Message from '../components/Message';
 const DELETE_CONTACTS_SCREEN = 'DELETE_CONTACTS_SCREEN';
 
 export default class Cards extends Component {
-    state = {
-        contactsToDelete: [],
-        yesBlock: {},
-        noBlock: {},
-    }
-
-    // componentDidMount() {
-    //     console.log('this.props', this.props);
+    // state = {
+    //     contactsToDelete: [],
     // }
 
-    // shouldComponentUpdate(nextProps, nextState) {
-    //     console.log("nextState", nextState);
-    //     if(this.state.contactsToDelete.length === 0) {
-    //         return true;
-    //     }
-    //     if(this.state.contactsToDelete.length !== nextState.contactsToDelete.length) {
-    //         return true;
-    //     }
-
-    //     return false;
-    // }
-
-    handleNope = (card) => this.setState({
-        contactsToDelete: [...this.state.contactsToDelete, card]
-    })
+    // handleNope = (card) => this.setState({
+    //     contactsToDelete: [...this.props.contactsToDelete, card]
+    // })
 
     render() {
         // console.log('this.props in render', this.props)
@@ -49,38 +30,26 @@ export default class Cards extends Component {
             this.props.data.length ?
             <View style={styles.container}>
                 <NavigationBar
-                    title={{title: 'Contacts'}}
+                    title={{title: "GoodbyeContacts"}}
                     style={{
                         borderBottomWidth: 1,
                         borderBottomColor: '#ccc'
                     }}
                     rightButton={{
-                        title: `Delete ${this.state.contactsToDelete.length}`,
+                        title: `Delete ${this.props.contactsToDelete.length}`,
                         handler: () =>
                             this.props.navigator.push({
                                 name: DELETE_CONTACTS_SCREEN,
                                 passProps: {
-                                    contactsToDelete: this.state.contactsToDelete
+                                    contactsToDelete: this.props.contactsToDelete
                                 }
                             })
                     }}
                 />
-                {/*<SwipeCards
-                    cards={this.props.data}
-                    renderCard={cardData => <Card {...cardData} />}
-                    renderNoMoreCards={() => <NoMoreCards />}
-                    handleNope={cardData => this.handleNope(cardData)}
-                    yupView={<Message wasApproved />}
-                    noView={<Message />}
-                    yupStyle={{
-                        position: 'absolute',
-                        top: 0,
-                    }}
-                />*/}
                 <SwipeCards
                     data={this.props.data}
                     renderCard={cardData => <Card {...cardData} />}
-                    handleNope={cardData => this.handleNope(cardData)}
+                    handleNope={cardData => this.props.handleNope(cardData)}
                     randomYes={randomNumber(possibleYesBlocks)}
                     randomNo={randomNumber(possibleDeniedBlocks)}
                 />
@@ -89,14 +58,6 @@ export default class Cards extends Component {
         )
     }
 }
-
-// function NoMoreCards() {
-//     return (
-//         <View>
-//             <Text>There are no more contacts left, Goodbye!</Text>
-//         </View>
-//     )
-// }
 
 function randomNumber(array) {
     return array[Math.floor(Math.random() * array.length)];
