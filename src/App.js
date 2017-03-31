@@ -32,9 +32,12 @@ export default class App extends Component {
         contactsToDelete: [...this.state.contactsToDelete, card]
     })
 
-    removeContactToBeDelete(contactToRemove) {
-        console.log('remove contact to be deleted...')
-        console.log("contactToRemove", contactToRemove);
+    removeContactToBeDelete = (contactToRemove) => {
+        const contactsToDelete = this.state.contactsToDelete.filter(contact =>
+            contact.recordID !== contactToRemove.recordID
+        )
+
+        this.setState({ contactsToDelete });
     }
 
     renderScene = (route, navigator) => {
@@ -52,6 +55,7 @@ export default class App extends Component {
                         navigator={navigator}
                         route={route}
                         removeContactToBeDelete={this.removeContactToBeDelete}
+                        contactsToDelete={this.state.contactsToDelete}
                         {...route.passProps}
                     />
         }

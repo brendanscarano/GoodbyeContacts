@@ -6,7 +6,7 @@ import Contacts from 'react-native-contacts';
 import Contact from '../components/Contact';
 
 export default function DeleteContacts(props) {
-    console.log("props", props);
+    console.log("delete contacts props", props);
     return (
         <View style={styles.container}>
             <NavigationBar

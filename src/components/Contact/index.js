@@ -2,7 +2,6 @@ import React from 'react';
 import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
 
 export default function Contact(props) {
-    console.log("props", props);
     const { givenName, familyName, recordID } = props.item;
     const fullName = `${givenName} ${familyName || ''}`;
 
@@ -17,10 +16,6 @@ export default function Contact(props) {
             </TouchableHighlight>
         </View>
     )
-}
-
-function removeContact() {
-    console.log('removing contact from delete...')
 }
 
 const styles = StyleSheet.create({

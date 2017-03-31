@@ -1,5 +1,4 @@
-// DOESNT HAVE TO BE A CLASS!!!
-import React, { Component } from 'react';
+import React from 'react';
 import {
     StyleSheet,
     Text,
@@ -15,48 +14,34 @@ import Card from '../components/Card';
 import Message from '../components/Message';
 const DELETE_CONTACTS_SCREEN = 'DELETE_CONTACTS_SCREEN';
 
-export default class Cards extends Component {
-    // state = {
-    //     contactsToDelete: [],
-    // }
-
-    // handleNope = (card) => this.setState({
-    //     contactsToDelete: [...this.props.contactsToDelete, card]
-    // })
-
-    render() {
-        // console.log('this.props in render', this.props)
-        return (
-            this.props.data.length ?
-            <View style={styles.container}>
-                <NavigationBar
-                    title={{title: "GoodbyeContacts"}}
-                    style={{
-                        borderBottomWidth: 1,
-                        borderBottomColor: '#ccc'
-                    }}
-                    rightButton={{
-                        title: `Delete ${this.props.contactsToDelete.length}`,
-                        handler: () =>
-                            this.props.navigator.push({
-                                name: DELETE_CONTACTS_SCREEN,
-                                passProps: {
-                                    contactsToDelete: this.props.contactsToDelete
-                                }
-                            })
-                    }}
-                />
-                <SwipeCards
-                    data={this.props.data}
-                    renderCard={cardData => <Card {...cardData} />}
-                    handleNope={cardData => this.props.handleNope(cardData)}
-                    randomYes={randomNumber(possibleYesBlocks)}
-                    randomNo={randomNumber(possibleDeniedBlocks)}
-                />
-            </View>
-            : <Loading />
-        )
-    }
+export default function Cards(props) {
+    return (
+        data.length ?
+        <View style={styles.container}>
+            <NavigationBar
+                title={{title: "GoodbyeContacts"}}
+                style={{
+                    borderBottomWidth: 1,
+                    borderBottomColor: '#ccc'
+                }}
+                rightButton={{
+                    title: `Delete ${contactsToDelete.length}`,
+                    handler: () =>
+                        navigator.push({
+                            name: DELETE_CONTACTS_SCREEN
+                        })
+                }}
+            />
+            <SwipeCards
+                data={data}
+                renderCard={cardData => <Card {...cardData} />}
+                handleNope={cardData => handleNope(cardData)}
+                randomYes={randomNumber(possibleYesBlocks)}
+                randomNo={randomNumber(possibleDeniedBlocks)}
+            />
+        </View>
+        : <Loading />
+    )
 }
 
 function randomNumber(array) {
