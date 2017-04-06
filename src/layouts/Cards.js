@@ -6,7 +6,7 @@ import {
     Image,
     ActivityIndicator
 } from 'react-native';
-import SwipeCards from '../components/SwipeCards';
+import SwipeCards from '../react-native-swipe-cards/SwipeCards';
 import { possibleYesBlocks, possibleDeniedBlocks } from '../data/messages';
 
 import NavigationBar from 'react-native-navbar';
@@ -15,6 +15,8 @@ import Message from '../components/Message';
 const DELETE_CONTACTS_SCREEN = 'DELETE_CONTACTS_SCREEN';
 
 export default function Cards(props) {
+    const randomYes = randomNumber(possibleYesBlocks);
+    const randomNo = randomNumber(possibleDeniedBlocks);
     return (
         props.data.length ?
         <View style={styles.container}>
@@ -33,12 +35,19 @@ export default function Cards(props) {
                 }}
             />
             <SwipeCards
-                data={props.data}
+                cards={props.data}
                 renderCard={cardData => <Card {...cardData} />}
                 handleYup={cardData => props.handleYup(cardData)}
                 handleNope={cardData => props.handleNope(cardData)}
-                randomYes={randomNumber(possibleYesBlocks)}
-                randomNo={randomNumber(possibleDeniedBlocks)}
+                renderNoMoreCards={() => <NoMoreCards />}
+                randomYes={randomYes}
+                randomNo={randomNo}
+                yupView={<Message wasApproved messageObject={randomYes} />}
+                noView={<Message messageObject={randomNo} />}
+                yupStyle={{
+                    position: 'absolute',
+                    top: 0,
+                }}
             />
         </View>
         : <Loading />
@@ -68,3 +77,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
 })
+
+function NoMoreCards() {
+    return (
+        <View>
+            <Text>There are no more contacts left, Goodbye!</Text>
+        </View>
+    )
+}

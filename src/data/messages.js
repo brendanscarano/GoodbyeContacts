@@ -8,6 +8,9 @@ const possibleYesBlocks = [
   {text: 'What luck I have', emoji: 'shamrock'},
   {text: 'Phew!', emoji: 'relaxed'},
   {text: 'Time to recycle this contact back in', emoji: 'recycle'},
+  {text: 'Peace be with you', emoji: 'v'},
+  {text: 'Pound it', emoji: 'facepunch'},
+  {text: 'Cheers', emoji: 'clap'},
 ]
 
 const possibleDeniedBlocks = [
@@ -22,7 +25,8 @@ const possibleDeniedBlocks = [
   {text: 'Dead contacts tell no tales', emoji: 'skull_and_crossbones'},
   {text: 'This contact has become a biohazard', emoji: 'biohazard_sign'},
   {text: 'This contact has become radioactive', emoji: 'radioactive_sign'},
-  {text: 'Awww shucks', emoji: 'white_frowning_face'},
+  {text: 'Awww shucks', emoji: 'pensive'},
+  {text: 'Peace out brah', emoji: 'v'},
 ]
 
 export {
