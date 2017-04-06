@@ -16,7 +16,7 @@ const DELETE_CONTACTS_SCREEN = 'DELETE_CONTACTS_SCREEN';
 
 export default function Cards(props) {
     return (
-        data.length ?
+        props.data.length ?
         <View style={styles.container}>
             <NavigationBar
                 title={{title: "GoodbyeContacts"}}
@@ -25,17 +25,18 @@ export default function Cards(props) {
                     borderBottomColor: '#ccc'
                 }}
                 rightButton={{
-                    title: `Delete ${contactsToDelete.length}`,
+                    title: `Delete ${props.contactsToDelete.length}`,
                     handler: () =>
-                        navigator.push({
+                        props.navigator.push({
                             name: DELETE_CONTACTS_SCREEN
                         })
                 }}
             />
             <SwipeCards
-                data={data}
+                data={props.data}
                 renderCard={cardData => <Card {...cardData} />}
-                handleNope={cardData => handleNope(cardData)}
+                handleYup={cardData => props.handleYup(cardData)}
+                handleNope={cardData => props.handleNope(cardData)}
                 randomYes={randomNumber(possibleYesBlocks)}
                 randomNo={randomNumber(possibleDeniedBlocks)}
             />

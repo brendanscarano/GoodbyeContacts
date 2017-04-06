@@ -28,9 +28,17 @@ export default class App extends Component {
         })
     }
 
-    handleNope = (card) => this.setState({
-        contactsToDelete: [...this.state.contactsToDelete, card]
-    })
+    handleNope = (card) => {
+        console.log('handling nope...')
+        return this.setState({
+            contactsToDelete: [...this.state.contactsToDelete, card]
+        })
+    }
+
+    handleYup = () => {
+        console.log('handling yup...')
+        this.forceUpdate();
+    }
 
     removeContactToBeDelete = (contactToRemove) => {
         const contactsToDelete = this.state.contactsToDelete.filter(contact =>
@@ -47,6 +55,7 @@ export default class App extends Component {
                         route={route}
                         data={this.state.contacts}
                         contactsToDelete={this.state.contactsToDelete}
+                        handleYup={this.handleYup}
                         handleNope={this.handleNope}
                     />
         }

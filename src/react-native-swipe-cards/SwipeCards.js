@@ -197,6 +197,17 @@ export default class SwipeCards extends Component {
     });
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+      const { randomYes, randomNo } = this.props;
+
+      if (randomYes.text !== nextProps.randomYes.text
+          || randomNo.text !== nextProps.randomNo.text) {
+            return false;
+      }
+
+      return true;
+  }
+
   _forceLeftSwipe() {
     this.cardAnimation = Animated.timing(this.state.pan, {
       toValue: { x: -500, y: 0 },

@@ -4,6 +4,10 @@ const possibleYesBlocks = [
   {text: 'This contact will see another day', emoji: 'sunrise'},
   {text: 'Grazie', emoji: 'flag-it'},
   {text: 'Merci', emoji: 'flag-fr'},
+  {text: 'You brightetened up my day', emoji: 'sunny'},
+  {text: 'What luck I have', emoji: 'shamrock'},
+  {text: 'Phew!', emoji: 'relaxed'},
+  {text: 'Time to recycle this contact back in', emoji: 'recycle'},
 ]
 
 const possibleDeniedBlocks = [
@@ -15,6 +19,10 @@ const possibleDeniedBlocks = [
   {text: 'Say goodnight to the bad guy', emoji: 'gun'},
   {text: 'Long live, the king!', emoji: 'lion_face'},
   {text: 'That strings!', emoji: 'scorpion'},
+  {text: 'Dead contacts tell no tales', emoji: 'skull_and_crossbones'},
+  {text: 'This contact has become a biohazard', emoji: 'biohazard_sign'},
+  {text: 'This contact has become radioactive', emoji: 'radioactive_sign'},
+  {text: 'Awww shucks', emoji: 'white_frowning_face'},
 ]
 
 export {
