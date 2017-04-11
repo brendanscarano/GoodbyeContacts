@@ -7,7 +7,11 @@ import {
     AsyncStorage,
 } from 'react-native';
 import { connect } from 'react-redux';
-import { fetchContacts } from './redux/module';
+import {
+    fetchContacts,
+    addContactToDelete,
+    removeContactToBeDeleted
+} from './redux/module';
 
 import Contacts from 'react-native-contacts';
 import Cards from './layouts/Cards';
@@ -17,20 +21,21 @@ const CARDS_SCREEN = 'CARDS_SCREEN';
 const DELETE_CONTACTS_SCREEN = 'DELETE_CONTACTS_SCREEN';
 
 @connect(
-    state => ({
-        contacts: state.contactsReducer.contacts
-    }), {
-        fetchContacts,
-        // fetchSuggestions,
-        // fetchCartDetails,
-        // updateActiveCategory
-    }
+    state => {
+        console.log('state in connect', state)
+        return ({
+            contacts: state.contactsReducer.contacts,
+            contactsToDelete: state.contactsReducer.contactsToDelete,
+        })}, {
+            fetchContacts,
+            addContactToDelete,
+            removeContactToBeDeleted,
+            // fetchSuggestions,
+            // fetchCartDetails,
+            // updateActiveCategory
+        }
 )
 export default class App extends Component {
-    state = {
-        contactsToDelete: [],
-    }
-
     componentWillMount() {
         this.props.fetchContacts();
         // Contacts.getAll((err, contacts) => {
@@ -52,6 +57,7 @@ export default class App extends Component {
     handleNope = (contact) => {
         console.log("contact", contact.recordID);
         console.log("contact", typeof contact.recordID);
+        this.props.addContactToDelete(contact.recordID);
         // AsyncStorage.setItem('lastContactId', contact.recordID).then(res => {
         //     this.setState({
         //         contactsToDelete: [...this.state.contactsToDelete, contact]
@@ -63,14 +69,6 @@ export default class App extends Component {
         // AsyncStorage.setItem('lastContactId', contact.recordID).then(res => {
         //     this.forceUpdate();
         // });
-    }
-
-    removeContactToBeDelete = (contactToRemove) => {
-        const contactsToDelete = this.state.contactsToDelete.filter(contact =>
-            contact.recordID !== contactToRemove.recordID
-        )
-
-        this.setState({ contactsToDelete });
     }
 
     startOver = () => {
@@ -87,7 +85,7 @@ export default class App extends Component {
                         route={route}
                         fullContactsLength={this.props.contacts.length}
                         data={this.props.contacts}
-                        contactsToDeleteLength={this.state.contactsToDelete.length}
+                        contactsToDeleteLength={this.props.contactsToDelete.length}
                         startOverFunc={this.startOver}
 
                         handleYup={this.handleYup}
@@ -98,8 +96,8 @@ export default class App extends Component {
             return <DeleteContacts
                         navigator={navigator}
                         route={route}
-                        removeContactToBeDelete={this.removeContactToBeDelete}
-                        contactsToDelete={this.state.contactsToDelete}
+                        removeContactToBeDelete={this.props.removeContactToBeDeleted}
+                        contactsToDelete={this.props.contactsToDelete}
                         {...route.passProps}
                     />
         }
