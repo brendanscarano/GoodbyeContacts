@@ -27,11 +27,15 @@ export default function Cards(props) {
                     borderBottomColor: '#ccc'
                 }}
                 rightButton={{
-                    title: `Delete ${props.contactsToDelete.length}`,
+                    title: `Delete ${props.contactsToDeleteLength}`,
                     handler: () =>
                         props.navigator.push({
                             name: DELETE_CONTACTS_SCREEN
                         })
+                }}
+                leftButton={{
+                    title: 'Start Over',
+                    handler: props.startOverFunc
                 }}
             />
             <SwipeCards
@@ -49,6 +53,10 @@ export default function Cards(props) {
                     top: 0,
                 }}
             />
+
+            <View>
+                <Text>{`${props.currentContactNumber}/${props.fullContactsLength}`}</Text>
+            </View>
         </View>
         : <Loading />
     )
