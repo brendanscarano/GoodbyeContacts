@@ -11,7 +11,7 @@ export default function Card(props) {
 
     return (
         <View style={[styles.card, {backgroundColor: props.backgroundColor}]}>
-            <Text>{fullName}</Text>
+            <Text style={styles.name}>{fullName}</Text>
         </View>
     )
 }
@@ -21,9 +21,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         width: 300,
-        height: 150,
-        borderWidth: 2,
-        borderColor: 'blue',
-        borderRadius: 10,
+        height: 300,
+        // borderWidth: 2,
+        // borderColor: 'blue',
+        // borderRadius: 10,
     },
+    name: {
+        fontSize: 64,
+        textAlign: 'center',
+    }
 })

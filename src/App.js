@@ -10,8 +10,11 @@ import { connect } from 'react-redux';
 import {
     fetchContacts,
     addContactToDelete,
-    removeContactToBeDeleted
+    removeContactToBeDeleted,
+    updateCurrentIndex
 } from './redux/module';
+import RNRestart from 'react-native-restart';
+console.log("RNRestart", RNRestart);
 
 import Contacts from 'react-native-contacts';
 import Cards from './layouts/Cards';
@@ -25,57 +28,39 @@ const DELETE_CONTACTS_SCREEN = 'DELETE_CONTACTS_SCREEN';
         console.log('state in connect', state)
         return ({
             contacts: state.contactsReducer.contacts,
-            contactsToDelete: state.contactsReducer.contactsToDelete,
+            fullContactsLength: state.contactsReducer.fullContactsLength,
+            currentContactPosition: state.contactsReducer.currentContactPosition,
+            contactsToDelete: contactsToDeleteArray(state.contactsReducer),
         })}, {
             fetchContacts,
             addContactToDelete,
             removeContactToBeDeleted,
-            // fetchSuggestions,
-            // fetchCartDetails,
-            // updateActiveCategory
+            updateCurrentIndex,
         }
 )
 export default class App extends Component {
-    componentWillMount() {
+    componentDidMount() {
         this.props.fetchContacts();
-        // Contacts.getAll((err, contacts) => {
-        //     if(err && err.type === 'permissionDenied'){
-        //         // x.x
-        //     } else {
-        //         console.log("contacts", contacts);
-
-        //         AsyncStorage.getItem('lastContactId').then(res => {
-
-        //             const lastContactSeenIndex = contacts.findIndex(contact => contact.recordID === res);
-
-        //             this.setState({ contacts, lastContactSeenIndex })
-        //         });
-        //     }
-        // })
     }
 
-    handleNope = (contact) => {
-        console.log("contact", contact.recordID);
-        console.log("contact", typeof contact.recordID);
-        this.props.addContactToDelete(contact.recordID);
-        // AsyncStorage.setItem('lastContactId', contact.recordID).then(res => {
-        //     this.setState({
-        //         contactsToDelete: [...this.state.contactsToDelete, contact]
-        //     })
-        // });
+    handleNope = ({ recordID }) => {
+        AsyncStorage.setItem('lastContactId', recordID).then(res => {
+            this.props.addContactToDelete(recordID, this.props.currentContactPosition);
+        });
     }
 
-    handleYup = (contact) => {
-        // AsyncStorage.setItem('lastContactId', contact.recordID).then(res => {
-        //     this.forceUpdate();
-        // });
+    handleYup = ({ recordID }) => {
+        AsyncStorage.setItem('lastContactId', recordID).then(res => {
+            this.props.updateCurrentIndex(this.props.currentContactPosition);
+        });
     }
 
     startOver = () => {
-        console.log('resetting state...')
-        // AsyncStorage.setItem('lastContactId', '-1').then(res => {
-        //     this.setState({ lastContactSeenID: '-1'})
-        // });
+        AsyncStorage.setItem('lastContactId', '0').then(res => {
+            // this.props.fetchContacts();
+            // this.forceUpdate();
+            RNRestart.Restart();
+        });
     }
 
     renderScene = (route, navigator) => {
@@ -83,7 +68,8 @@ export default class App extends Component {
             return <Cards
                         navigator={navigator}
                         route={route}
-                        fullContactsLength={this.props.contacts.length}
+                        currentContactPosition={this.props.currentContactPosition}
+                        fullContactsLength={this.props.fullContactsLength}
                         data={this.props.contacts}
                         contactsToDeleteLength={this.props.contactsToDelete.length}
                         startOverFunc={this.startOver}
@@ -112,4 +98,11 @@ export default class App extends Component {
             />
         )
     }
+}
+
+// ----------------------
+// Selectors
+// ----------------------
+function contactsToDeleteArray({ contacts, contactsToDelete }) {
+    return contacts.filter(contact => contactsToDelete.includes(contact.recordID));
 }

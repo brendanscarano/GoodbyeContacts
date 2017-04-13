@@ -1,5 +1,10 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
+import {
+    StyleSheet,
+    Text,
+    View,
+    TouchableHighlight
+} from 'react-native';
 
 export default function Contact(props) {
     const { givenName, familyName, recordID } = props.item;
@@ -10,7 +15,7 @@ export default function Contact(props) {
             <Text style={styles.name}>{fullName}</Text>
             <TouchableHighlight
                 style={styles.cancel}
-                onPress={(item) => props.removeContactToBeDelete(props.item)}
+                onPress={(item) => props.removeContactToBeDelete(props.contactsToDelete, props.item.recordID)}
             >
                 <Text>X</Text>
             </TouchableHighlight>

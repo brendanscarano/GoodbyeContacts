@@ -4,7 +4,8 @@ import {
     Text,
     View,
     Image,
-    ActivityIndicator
+    ActivityIndicator,
+    TouchableHighlight,
 } from 'react-native';
 import SwipeCards from '../react-native-swipe-cards/SwipeCards';
 import { possibleYesBlocks, possibleDeniedBlocks } from '../data/messages';
@@ -17,6 +18,7 @@ const DELETE_CONTACTS_SCREEN = 'DELETE_CONTACTS_SCREEN';
 export default function Cards(props) {
     const randomYes = randomNumber(possibleYesBlocks);
     const randomNo = randomNumber(possibleDeniedBlocks);
+
     return (
         props.data.length ?
         <View style={styles.container}>
@@ -43,7 +45,7 @@ export default function Cards(props) {
                 renderCard={cardData => <Card {...cardData} />}
                 handleYup={cardData => props.handleYup(cardData)}
                 handleNope={cardData => props.handleNope(cardData)}
-                renderNoMoreCards={() => <NoMoreCards />}
+                renderNoMoreCards={() => <NoMoreCards onPress={props.startOverFunc} />}
                 randomYes={randomYes}
                 randomNo={randomNo}
                 yupView={<Message wasApproved messageObject={randomYes} />}
@@ -52,11 +54,8 @@ export default function Cards(props) {
                     position: 'absolute',
                     top: 0,
                 }}
+                currentPosition={props.currentContactPosition > props.fullContactsLength ? '' : `${props.currentContactPosition}/${props.fullContactsLength}`}
             />
-
-            <View>
-                <Text>{`${props.currentContactNumber}/${props.fullContactsLength}`}</Text>
-            </View>
         </View>
         : <Loading />
     )
@@ -75,6 +74,17 @@ function Loading() {
     )
 }
 
+function NoMoreCards(props) {
+    return (
+        <View>
+            <Text>There are no more contacts left, Goodbye!</Text>
+            <TouchableHighlight onPress={props.onPress}>
+                <Text>Start Over</Text>
+            </TouchableHighlight>
+        </View>
+    )
+}
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -86,10 +96,3 @@ const styles = StyleSheet.create({
     },
 })
 
-function NoMoreCards() {
-    return (
-        <View>
-            <Text>There are no more contacts left, Goodbye!</Text>
-        </View>
-    )
-}

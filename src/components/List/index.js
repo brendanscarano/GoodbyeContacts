@@ -16,6 +16,7 @@ export default class List extends Component {
     }
 
     componentWillUpdate(nextProps) {
+        console.log("nextProps", nextProps);
         if (this.state.data.length !== nextProps.data.length) {
             this.setState({
                 data: nextProps.data,
