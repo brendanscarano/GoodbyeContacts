@@ -27,7 +27,6 @@ function fetchContacts(cb) {
 export default apiMiddleware = ({ dispatch }) => next => action => {
     if (action.type === FETCH_CONTACTS) {
         fetchContacts(data => {
-            console.log("data", data);
             return dispatch(setContacts(data))
         })
     }

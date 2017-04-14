@@ -44,6 +44,7 @@ export default class App extends Component {
     }
 
     handleNope = ({ recordID }) => {
+        console.log('SAVE THE CONTACTS TO BE DELETED TO ASYNC STORAGE AS WELL!!!!!')
         AsyncStorage.setItem('lastContactId', recordID).then(res => {
             this.props.addContactToDelete(recordID, this.props.currentContactPosition);
         });
@@ -57,8 +58,6 @@ export default class App extends Component {
 
     startOver = () => {
         AsyncStorage.setItem('lastContactId', '0').then(res => {
-            // this.props.fetchContacts();
-            // this.forceUpdate();
             RNRestart.Restart();
         });
     }
