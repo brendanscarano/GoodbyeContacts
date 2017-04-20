@@ -78,7 +78,10 @@ function NoMoreCards(props) {
     return (
         <View>
             <Text>There are no more contacts left, Goodbye!</Text>
-            <TouchableHighlight onPress={props.onPress}>
+            <TouchableHighlight
+                onPress={props.onPress}
+                style={styles.startOver}
+            >
                 <Text>Start Over</Text>
             </TouchableHighlight>
         </View>
@@ -94,5 +97,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
+    startOver: {
+        borderWidth: 2,
+        borderColor: 'green',
+        justifyContent: 'center',
+        alignItems: 'center',
+        margin: 10,
+        padding: 10,
+    }
 })
 

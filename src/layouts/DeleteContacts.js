@@ -4,6 +4,7 @@ import NavigationBar from 'react-native-navbar';
 import List from '../components/List';
 import Contacts from 'react-native-contacts';
 import Contact from '../components/Contact';
+import RNRestart from 'react-native-restart';
 
 export default function DeleteContacts(props) {
     console.log("delete contacts props", props);
@@ -27,6 +28,7 @@ export default function DeleteContacts(props) {
                 data={props.contactsToDelete}
                 listItemToRender={Contact}
                 parentData={props}
+                removeContactToBeDelete={props.removeContactToBeDelete}
             />
         </View>
     )
@@ -39,13 +41,7 @@ function deleteContacts(contacts) {
         }, err => {console.log(err)});
     })
 
-    Contacts.getAll((err, contacts) => {
-      if(err && err.type === 'permissionDenied'){
-        // x.x
-      } else {
-        console.log('contacts', contacts)
-      }
-    })
+    RNRestart.Restart();
 }
 
 function Button(props) {
@@ -68,11 +64,12 @@ const styles = StyleSheet.create({
         backgroundColor: 'red',
         borderWidth: 1,
         borderColor: 'red',
-        height: 25,
+        height: 40,
         borderRadius: 5,
-        marginVertical: 10,
+        marginVertical: 20,
         marginHorizontal: 5,
-        alignItems: 'stretch',
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     buttonText: {
         textAlign: 'center',

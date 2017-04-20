@@ -1,17 +1,20 @@
+import { AsyncStorage } from 'react-native';
+
 // ----------------------
 // Constants
 // ----------------------
 export const FETCH_CONTACTS = 'FETCH_CONTACTS';
 const SET_CONTACTS = 'SET_CONTACTS';
 const ADD_CONTACT_TO_DELETE = 'ADD_CONTACT_TO_DELETE';
-const REMOVE_CONTACT_TO_BE_DELETED = 'REMOVE_CONTACT_TO_BE_DELETED';
+export const REMOVE_CONTACT_TO_BE_DELETED = 'REMOVE_CONTACT_TO_BE_DELETED';
 const UPDATE_CURRENT_INDEX = 'UPDATE_CURRENT_INDEX';
 const START_OVER = 'START_OVER';
 
 const initialState = {
     contacts: [],
-    fullContactsLength: 0,
     currentContactPosition: 0,
+    fullContactsLength: 0,
+    allContacts: [],
     contactsToDelete: [],
     currentContactRecordID: '',
 }
@@ -22,13 +25,21 @@ const initialState = {
 export default function contactsReducer(state = initialState, action) {
     switch(action.type) {
         case SET_CONTACTS:
-            const { fullContactsLength, contacts, currentContactPosition } = action.payload;
+            const {
+                contacts,
+                currentContactPosition,
+                fullContactsLength,
+                allContacts,
+                contactsToDelete
+            } = action.payload;
 
             return {
                 ...state,
-                fullContactsLength,
                 contacts,
-                currentContactPosition
+                currentContactPosition,
+                fullContactsLength,
+                allContacts,
+                contactsToDelete,
             }
         case ADD_CONTACT_TO_DELETE:
             return {
@@ -42,6 +53,7 @@ export default function contactsReducer(state = initialState, action) {
                 currentContactPosition: ++action.payload.currentContactPosition
             }
         case REMOVE_CONTACT_TO_BE_DELETED:
+            // console.log("remove contact to delete action", action);
             return {
                 ...state,
                 contactsToDelete: action.payload.newContactIDsToDelete
@@ -65,14 +77,10 @@ export function fetchContacts() {
     }
 }
 export function setContacts(data) {
-    const { contacts, fullContactsLength, currentContactPosition } = data;
-
     return {
         type: SET_CONTACTS,
         payload: {
-            contacts,
-            currentContactPosition,
-            fullContactsLength
+            ...data
         }
     }
 }
@@ -94,10 +102,14 @@ export function updateCurrentIndex(currentContactPosition) {
     }
 }
 export function removeContactToBeDeleted(contactsToDelete, contactID) {
+    console.log("contactsToDelete", contactsToDelete);
+    console.log("contactID", contactID);
+
     const newContactIDsToDelete = contactsToDelete
         .map(contact => contact.recordID)
         .filter(recordID => recordID !== contactID)
 
+    // console.log("newContactIDsToDelete", newContactIDsToDelete);
     return {
         type: REMOVE_CONTACT_TO_BE_DELETED,
         payload: {

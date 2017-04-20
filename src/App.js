@@ -14,7 +14,6 @@ import {
     updateCurrentIndex
 } from './redux/module';
 import RNRestart from 'react-native-restart';
-console.log("RNRestart", RNRestart);
 
 import Contacts from 'react-native-contacts';
 import Cards from './layouts/Cards';
@@ -26,11 +25,21 @@ const DELETE_CONTACTS_SCREEN = 'DELETE_CONTACTS_SCREEN';
 @connect(
     state => {
         console.log('state in connect', state)
+
+        /**
+
+            ONLY CONTACTS THAT AREN'T SELECTED
+            TO BE DELETED SHOULD BE ABLE TO BE CYCLED
+            THROUGH!!!
+
+        */
+
         return ({
             contacts: state.contactsReducer.contacts,
             fullContactsLength: state.contactsReducer.fullContactsLength,
             currentContactPosition: state.contactsReducer.currentContactPosition,
             contactsToDelete: contactsToDeleteArray(state.contactsReducer),
+            contactsToDeleteIDs: state.contactsReducer.contactsToDelete,
         })}, {
             fetchContacts,
             addContactToDelete,
@@ -44,8 +53,10 @@ export default class App extends Component {
     }
 
     handleNope = ({ recordID }) => {
-        console.log('SAVE THE CONTACTS TO BE DELETED TO ASYNC STORAGE AS WELL!!!!!')
-        AsyncStorage.setItem('lastContactId', recordID).then(res => {
+        AsyncStorage.multiSet([
+            ['lastContactId', recordID],
+            ['contactsToDeleteArray', JSON.stringify([...this.props.contactsToDeleteIDs, recordID])]
+        ]).then(res => {
             this.props.addContactToDelete(recordID, this.props.currentContactPosition);
         });
     }
@@ -57,9 +68,17 @@ export default class App extends Component {
     }
 
     startOver = () => {
-        AsyncStorage.setItem('lastContactId', '0').then(res => {
-            RNRestart.Restart();
-        });
+        // AsyncStorage.multiSet([
+        //     ['lastContactId', '0'],
+        //     ['contactsToDeleteArray', JSON.stringify([])]
+        // ]).then(res => {
+        //     RNRestart.Restart();
+        // });
+
+        AsyncStorage.setItem('lastContactId', '0')
+            .then(res => {
+                RNRestart.Restart();
+            });
     }
 
     renderScene = (route, navigator) => {
@@ -102,6 +121,10 @@ export default class App extends Component {
 // ----------------------
 // Selectors
 // ----------------------
-function contactsToDeleteArray({ contacts, contactsToDelete }) {
-    return contacts.filter(contact => contactsToDelete.includes(contact.recordID));
+function contactsToCycleThrough({ allContacts, currentContactPosition }) {
+
+}
+
+function contactsToDeleteArray({ allContacts, contactsToDelete }) {
+    return allContacts.filter(contact => contactsToDelete.includes(contact.recordID));
 }
