@@ -34,37 +34,38 @@ export default class List extends Component {
     //     }
     // }
 
-    shouldComponentUpdate(nextProps, nextState) {
-        console.log("this.state.data", this.state.data);
-        console.log("nextProps", nextProps);
-        console.log("nextState", nextState);
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     console.log("this.state.data", this.state.data);
+    //     console.log("nextProps", nextProps);
+    //     console.log("nextState", nextState);
 
-        if (nextProps.data.length === 0) {
-            console.log('set state to 0')
-            this.setState({
-                data: [],
-                dataSource: this.state.dataSource.cloneWithRows([])
-            })
+    //     if (nextProps.data.length === 0) {
+    //         console.log('set state to 0')
+    //         this.setState({
+    //             data: [],
+    //             dataSource: this.state.dataSource.cloneWithRows([])
+    //         })
 
-            return true;
-        }
+    //         return true;
+    //     }
 
-        if (this.state.data.length !== nextProps.data.length) {
-        //     console.log('setting new state in list...')
-            this.setState({
-                data: nextProps.data,
-                dataSource: this.state.dataSource.cloneWithRows(nextProps.data)
-            })
+    //     if (this.state.data.length !== nextProps.data.length) {
+    //     //     console.log('setting new state in list...')
+    //         this.setState({
+    //             data: nextProps.data,
+    //             dataSource: this.state.dataSource.cloneWithRows(nextProps.data)
+    //         })
 
-            return true;
-        }
+    //         return true;
+    //     }
 
 
-        return false;
-    }
+    //     return false;
+    // }
 
     renderRow = (item) => {
         console.log('this.props', this.props)
+        console.log('this.state', this.state)
         const Component = this.props.listItemToRender;
 
         // console.log("item", item);
@@ -78,7 +79,7 @@ export default class List extends Component {
                 <TouchableHighlight
                     style={styles.cancel}
                     onPress={() => {
-                        const newArray = this.state.data.slice();
+                        const newArray = this.state.data.filter(contact => contact.recordID !== item.recordID);
 
                         this.setState({
                             data: newArray,
