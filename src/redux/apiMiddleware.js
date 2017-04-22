@@ -24,7 +24,7 @@ function fetchContacts(cb) {
                     currentContactPosition,
                     contacts: contacts.slice(lastContactSeenIndex + 1),
                     allContacts: contacts,
-                    contactsToDelete: JSON.parse(contactsToDeleteRes[1])
+                    contactsToDelete: !!contactsToDeleteRes[1] ? JSON.parse(contactsToDeleteRes[1]) : [],
                 });
             });
         }
@@ -32,8 +32,6 @@ function fetchContacts(cb) {
 }
 
 export default apiMiddleware = ({ dispatch }) => next => action => {
-    // console.log("action in api middleware", action);
-
     if (action.type === FETCH_CONTACTS) {
         fetchContacts(data => {
             return dispatch(setContacts(data))

@@ -91,11 +91,15 @@ function NoMoreCards(props) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        borderWidth: 2,
+        backgroundColor: '#fff',
     },
     innerContainer: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+        borderWidth: 2,
+        borderColor: 'blue',
     },
     startOver: {
         borderWidth: 2,

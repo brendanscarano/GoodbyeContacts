@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
         borderTopColor: '#ddd',
         position: 'relative',
         flexDirection: 'row',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
     },
     name: {
         fontSize: 16,

@@ -1,5 +1,11 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableHighlight } from 'react-native';
+import {
+    View,
+    Text,
+    StyleSheet,
+    TouchableHighlight,
+    AsyncStorage
+} from 'react-native';
 import NavigationBar from 'react-native-navbar';
 import List from '../components/List';
 import Contacts from 'react-native-contacts';
@@ -7,7 +13,6 @@ import Contact from '../components/Contact';
 import RNRestart from 'react-native-restart';
 
 export default function DeleteContacts(props) {
-    console.log("delete contacts props", props);
     return (
         <View style={styles.container}>
             <NavigationBar
@@ -35,13 +40,25 @@ export default function DeleteContacts(props) {
 }
 
 function deleteContacts(contacts) {
+    console.log("contacts", contacts);
     contacts.forEach(contact => {
-        Contacts.deleteContact({
-            recordID: contact.recordID
-        }, err => {console.log(err)});
+        console.log("contact", contact);
+
+        Contacts.deleteContact(
+            { recordID: contact.recordID },
+            err => console.log(err)
+        )
+
     })
 
-    RNRestart.Restart();
+
+    // AsyncStorage.multiSet([
+    //     ['lastContactId', ''],
+    //     ['contactsToDeleteArray', []]
+    // ]).then(res => {
+    // });
+        // RNRestart.Restart();
+
 }
 
 function Button(props) {
@@ -59,6 +76,8 @@ function Button(props) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        borderWidth: 2,
+        backgroundColor: '#fff',
     },
     buttonWrapper: {
         backgroundColor: 'red',

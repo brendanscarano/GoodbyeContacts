@@ -14,7 +14,7 @@ const possibleYesBlocks = [
 
   {text: 'Thanks!', emoji: 'grinning'},
   {text: 'Oh ya!', emoji: 'grin'},
-  {text: 'smiley', emoji: 'Appreciate it'},
+  {text: 'smiley_cat', emoji: 'Appreciate it'},
   {text: 'You da best', emoji: 'smile'},
   {text: 'Do we even know each other?', emoji: 'sweat_smile'},
   {text: 'I always knew you loved me', emoji: 'heart_eyes'},

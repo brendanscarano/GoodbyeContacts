@@ -53,7 +53,6 @@ export default function contactsReducer(state = initialState, action) {
                 currentContactPosition: ++action.payload.currentContactPosition
             }
         case REMOVE_CONTACT_TO_BE_DELETED:
-            // console.log("remove contact to delete action", action);
             return {
                 ...state,
                 contactsToDelete: action.payload.newContactIDsToDelete
@@ -102,14 +101,10 @@ export function updateCurrentIndex(currentContactPosition) {
     }
 }
 export function removeContactToBeDeleted(contactsToDelete, contactID) {
-    console.log("contactsToDelete", contactsToDelete);
-    console.log("contactID", contactID);
-
     const newContactIDsToDelete = contactsToDelete
         .map(contact => contact.recordID)
         .filter(recordID => recordID !== contactID)
 
-    // console.log("newContactIDsToDelete", newContactIDsToDelete);
     return {
         type: REMOVE_CONTACT_TO_BE_DELETED,
         payload: {
