@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import {
     View,
     Text,
     StyleSheet,
     TouchableHighlight,
-    AsyncStorage
+    AsyncStorage,
+    InteractionManager,
 } from 'react-native';
+// console.log("InteractionManager", InteractionManager);
 import NavigationBar from 'react-native-navbar';
 import List from '../components/List';
 import Contacts from 'react-native-contacts';
@@ -13,40 +15,56 @@ import Contact from '../components/Contact';
 import RNRestart from 'react-native-restart';
 const DELETE_CONFIRMATION = 'DELETE_CONFIRMATION';
 
-export default function DeleteContacts(props) {
-    console.log("delete contacts props", props);
-    return (
-        <View style={styles.container}>
-            <NavigationBar
-                style={{
-                    borderBottomWidth: 1,
-                    borderBottomColor: '#ccc'
-                }}
-                leftButton={{
-                    title: 'Back',
-                    handler: () => props.navigator.pop()
-                }}
-            />
-            <Button
-                numberOfContacts={props.contactsToDelete.length}
-                onPress={() => {
-                    deleteContacts(props.contactsToDelete)
+export default class DeleteContacts extends PureComponent {
+    state = {
+        renderPlaceholderOnly: true,
+    }
 
-                    props.navigator.push({
-                        name: DELETE_CONFIRMATION,
-                        passProps: {
-                            numContactsDeleted: props.contactsToDelete.length
-                        }
-                    })
-                }}
-            />
-            <List
-                data={props.contactsToDelete}
-                listItemToRender={Contact}
-                removeContactToBeDelete={props.removeContactToBeDelete}
-            />
-        </View>
-    )
+    componentDidMount() {
+        console.log('InteractionManager', InteractionManager)
+        InteractionManager.runAfterInteractions(() => this.setState({ renderPlaceholderOnly: false }));
+    }
+
+    render() {
+        return (
+            <View style={styles.container}>
+                <NavigationBar
+                    style={{
+                        borderBottomWidth: 1,
+                        borderBottomColor: '#ccc'
+                    }}
+                    leftButton={{
+                        title: 'Back',
+                        handler: () => this.props.navigator.pop()
+                    }}
+                />
+                {
+                    this.state.renderPlaceholderOnly
+                        ? <View><Text>Loading</Text></View>
+                        :<View>
+                            <Button
+                                numberOfContacts={this.props.contactsToDelete.length}
+                                onPress={() => {
+                                    deleteContacts(this.props.contactsToDelete)
+
+                                    this.props.navigator.push({
+                                        name: DELETE_CONFIRMATION,
+                                        passProps: {
+                                            numContactsDeleted: this.props.contactsToDelete.length
+                                        }
+                                    })
+                                }}
+                            />
+                            <List
+                                data={this.props.contactsToDelete}
+                                listItemToRender={Contact}
+                                removeContactToBeDelete={this.props.removeContactToBeDelete}
+                            />
+                        </View>
+                }
+            </View>
+        )
+    }
 }
 
 function deleteContacts(contacts) {
