@@ -14,7 +14,7 @@ export default class List extends Component {
         const ds = new ListView.DataSource({
             rowHasChanged: (r1, r2) => r1 !== r2,
         })
-
+        console.log(props)
         this.state = {
             data: props.data,
             dataSource: ds.cloneWithRows(props.data)
@@ -22,6 +22,7 @@ export default class List extends Component {
     }
 
     renderRow = (item) => {
+        console.log("item", item);
         const { givenName, familyName, recordID } = item;
         const fullName = `${givenName} ${familyName || ''}`;
 
@@ -55,31 +56,12 @@ export default class List extends Component {
             <View style={styles.container}>
                 <ListView
                     dataSource={this.state.dataSource}
-                    renderRow={this.renderRow}
+                    renderRow={(rowData) => this.renderRow(rowData)}
                     enableEmptySections={true}
                 />
             </View>
         )
     }
-}
-
-
-function Contact(props) {
-    console.log("contact props", props);
-    const { givenName, familyName, recordID } = props.item;
-    const fullName = `${givenName} ${familyName || ''}`;
-
-    return (
-        <View style={styles.contact} key={recordID}>
-            <Text style={styles.name}>{fullName}</Text>
-            <TouchableHighlight
-                style={styles.cancel}
-                onPress={() => props.removeContactToBeDelete(props.contactsToDelete, props.item.recordID)}
-            >
-                <Text style={styles.icon}>X</Text>
-            </TouchableHighlight>
-        </View>
-    )
 }
 
 const styles = StyleSheet.create({

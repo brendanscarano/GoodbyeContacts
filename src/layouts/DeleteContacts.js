@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import {
     View,
     Text,
@@ -7,25 +7,25 @@ import {
     AsyncStorage,
     InteractionManager,
 } from 'react-native';
-// console.log("InteractionManager", InteractionManager);
 import NavigationBar from 'react-native-navbar';
 import List from '../components/List';
 import Contacts from 'react-native-contacts';
-import Contact from '../components/Contact';
-import RNRestart from 'react-native-restart';
 const DELETE_CONFIRMATION = 'DELETE_CONFIRMATION';
 
-export default class DeleteContacts extends PureComponent {
+export default class DeleteContacts extends Component {
     state = {
         renderPlaceholderOnly: true,
     }
 
     componentDidMount() {
         console.log('InteractionManager', InteractionManager)
-        InteractionManager.runAfterInteractions(() => this.setState({ renderPlaceholderOnly: false }));
+        InteractionManager.runAfterInteractions(() =>
+            this.setState({ renderPlaceholderOnly: false })
+        );
     }
 
     render() {
+        console.log(this.props);
         return (
             <View style={styles.container}>
                 <NavigationBar
@@ -38,30 +38,26 @@ export default class DeleteContacts extends PureComponent {
                         handler: () => this.props.navigator.pop()
                     }}
                 />
-                {
-                    this.state.renderPlaceholderOnly
-                        ? <View><Text>Loading</Text></View>
-                        :<View>
-                            <Button
-                                numberOfContacts={this.props.contactsToDelete.length}
-                                onPress={() => {
-                                    deleteContacts(this.props.contactsToDelete)
+                <Button
+                    numberOfContacts={this.props.contactsToDelete.length}
+                    onPress={() => {
+                        deleteContacts(this.props.contactsToDelete)
 
-                                    this.props.navigator.push({
-                                        name: DELETE_CONFIRMATION,
-                                        passProps: {
-                                            numContactsDeleted: this.props.contactsToDelete.length
-                                        }
-                                    })
-                                }}
-                            />
+                        this.props.navigator.push({
+                            name: DELETE_CONFIRMATION,
+                            passProps: {
+                                numContactsDeleted: this.props.contactsToDelete.length
+                            }
+                        })
+                    }}
+                />
+
                             <List
                                 data={this.props.contactsToDelete}
-                                listItemToRender={Contact}
                                 removeContactToBeDelete={this.props.removeContactToBeDelete}
                             />
-                        </View>
-                }
+
+
             </View>
         )
     }
