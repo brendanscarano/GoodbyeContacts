@@ -11,8 +11,10 @@ import List from '../components/List';
 import Contacts from 'react-native-contacts';
 import Contact from '../components/Contact';
 import RNRestart from 'react-native-restart';
+const DELETE_CONFIRMATION = 'DELETE_CONFIRMATION';
 
 export default function DeleteContacts(props) {
+    console.log("delete contacts props", props);
     return (
         <View style={styles.container}>
             <NavigationBar
@@ -27,12 +29,20 @@ export default function DeleteContacts(props) {
             />
             <Button
                 numberOfContacts={props.contactsToDelete.length}
-                onPress={() => deleteContacts(props.contactsToDelete)}
+                onPress={() => {
+                    deleteContacts(props.contactsToDelete)
+
+                    props.navigator.push({
+                        name: DELETE_CONFIRMATION,
+                        passProps: {
+                            numContactsDeleted: props.contactsToDelete.length
+                        }
+                    })
+                }}
             />
             <List
                 data={props.contactsToDelete}
                 listItemToRender={Contact}
-                parentData={props}
                 removeContactToBeDelete={props.removeContactToBeDelete}
             />
         </View>
@@ -41,24 +51,19 @@ export default function DeleteContacts(props) {
 
 function deleteContacts(contacts) {
     console.log("contacts", contacts);
-    contacts.forEach(contact => {
-        console.log("contact", contact);
+    AsyncStorage.multiSet([
+        ['contactsToDeleteArray', JSON.stringify([])]
+    ]).then(res => {
+        contacts.forEach(contact => {
+            console.log("contact", contact);
 
-        Contacts.deleteContact(
-            { recordID: contact.recordID },
-            err => console.log(err)
-        )
+            Contacts.deleteContact(
+                { recordID: contact.recordID },
+                err => console.log(err)
+            )
 
-    })
-
-
-    // AsyncStorage.multiSet([
-    //     ['lastContactId', ''],
-    //     ['contactsToDeleteArray', []]
-    // ]).then(res => {
-    // });
-        // RNRestart.Restart();
-
+        })
+    });
 }
 
 function Button(props) {
@@ -77,6 +82,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         borderWidth: 2,
+        borderColor: 'orange',
         backgroundColor: '#fff',
     },
     buttonWrapper: {

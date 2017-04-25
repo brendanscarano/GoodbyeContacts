@@ -11,6 +11,8 @@ const UPDATE_CURRENT_INDEX = 'UPDATE_CURRENT_INDEX';
 const START_OVER = 'START_OVER';
 
 const initialState = {
+    loaded: false,
+    loading: false,
     contacts: [],
     currentContactPosition: 0,
     fullContactsLength: 0,
@@ -35,6 +37,8 @@ export default function contactsReducer(state = initialState, action) {
 
             return {
                 ...state,
+                loaded: true,
+                loading: false,
                 contacts,
                 currentContactPosition,
                 fullContactsLength,
@@ -101,6 +105,8 @@ export function updateCurrentIndex(currentContactPosition) {
     }
 }
 export function removeContactToBeDeleted(contactsToDelete, contactID) {
+    console.log("contactsToDelete", contactsToDelete);
+    console.log("contactID", contactID);
     const newContactIDsToDelete = contactsToDelete
         .map(contact => contact.recordID)
         .filter(recordID => recordID !== contactID)

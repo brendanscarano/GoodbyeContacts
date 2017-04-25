@@ -20,6 +20,7 @@ export default function Cards(props) {
     const randomNo = randomNumber(possibleDeniedBlocks);
 
     return (
+        props.loaded && !props.data.length ? <NoMoreCards onPress={props.startOverFunc} /> :
         props.data.length ?
         <View style={styles.container}>
             <NavigationBar
@@ -75,8 +76,9 @@ function Loading() {
 }
 
 function NoMoreCards(props) {
+    console.log("props", props);
     return (
-        <View>
+        <View style={styles.innerContainer}>
             <Text>There are no more contacts left, Goodbye!</Text>
             <TouchableHighlight
                 onPress={props.onPress}

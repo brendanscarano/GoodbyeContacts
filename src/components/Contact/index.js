@@ -6,20 +6,8 @@ import {
     TouchableHighlight
 } from 'react-native';
 
-/**
-
-    props.removeContactToBeDeleted also has to remove
-    the contact from asyncStorage as well!!!
-
-
-
-
-    CONTACT INFORMATION IS NOT UPDATING PROPERLY WHEN NEW PROPS ARE PASSED DOWN!!!
-*/
-
-
 export default function Contact(props) {
-    console.log("contact props", props);
+    console.log("props", props);
     const { givenName, familyName, recordID } = props.item;
     const fullName = `${givenName} ${familyName || ''}`;
 

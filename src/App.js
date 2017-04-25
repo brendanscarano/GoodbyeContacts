@@ -18,9 +18,11 @@ import RNRestart from 'react-native-restart';
 import Contacts from 'react-native-contacts';
 import Cards from './layouts/Cards';
 import DeleteContacts from './layouts/DeleteContacts';
+import DeleteConfirmation from './layouts/DeleteConfirmation';
 
 const CARDS_SCREEN = 'CARDS_SCREEN';
 const DELETE_CONTACTS_SCREEN = 'DELETE_CONTACTS_SCREEN';
+const DELETE_CONFIRMATION = 'DELETE_CONFIRMATION';
 
 @connect(
     state => {
@@ -35,6 +37,8 @@ const DELETE_CONTACTS_SCREEN = 'DELETE_CONTACTS_SCREEN';
         */
 
         return ({
+            loaded: state.contactsReducer.loaded,
+            loading: state.contactsReducer.loading,
             contacts: state.contactsReducer.contacts,
             fullContactsLength: state.contactsReducer.fullContactsLength,
             currentContactPosition: state.contactsReducer.currentContactPosition,
@@ -68,13 +72,6 @@ export default class App extends Component {
     }
 
     startOver = () => {
-        // AsyncStorage.multiSet([
-        //     ['lastContactId', '0'],
-        //     ['contactsToDeleteArray', JSON.stringify([])]
-        // ]).then(res => {
-        //     RNRestart.Restart();
-        // });
-
         AsyncStorage.setItem('lastContactId', '0')
             .then(res => {
                 RNRestart.Restart();
@@ -86,6 +83,8 @@ export default class App extends Component {
             return <Cards
                         navigator={navigator}
                         route={route}
+                        loaded={this.props.loaded}
+                        loading={this.props.loading}
                         currentContactPosition={this.props.currentContactPosition}
                         fullContactsLength={this.props.fullContactsLength}
                         data={this.props.contacts}
@@ -102,6 +101,13 @@ export default class App extends Component {
                         route={route}
                         removeContactToBeDelete={this.props.removeContactToBeDeleted}
                         contactsToDelete={this.props.contactsToDelete}
+                        {...route.passProps}
+                    />
+        }
+        if (route.name === DELETE_CONFIRMATION) {
+            return <DeleteConfirmation
+                        navigator={navigator}
+                        route={route}
                         {...route.passProps}
                     />
         }

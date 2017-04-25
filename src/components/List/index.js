@@ -66,6 +66,7 @@ export default class List extends Component {
     renderRow = (item) => {
         console.log('this.props', this.props)
         console.log('this.state', this.state)
+        console.log("item", item);
         const Component = this.props.listItemToRender;
 
         // console.log("item", item);
@@ -79,7 +80,13 @@ export default class List extends Component {
                 <TouchableHighlight
                     style={styles.cancel}
                     onPress={() => {
-                        const newArray = this.state.data.filter(contact => contact.recordID !== item.recordID);
+                        console.log("this.state.data", this.state.data);
+                        const indexToRemove = this.state.data.findIndex((element) => element.recordID === item.recordID);
+                        console.log("indexToRemove", indexToRemove);
+
+                        const newArray = this.state.data.slice();
+                        newArray.splice(indexToRemove, 1);
+                        console.log("newArray", newArray);
 
                         this.setState({
                             data: newArray,
@@ -144,8 +151,10 @@ const styles = StyleSheet.create({
         fontSize: 16,
     },
     icon: {
-        width: 32,
-        height: 32,
+        width: 48,
+        height: 48,
+        borderWidth: 2,
+        borderColor: 'green',
         fontWeight: 'bold',
     }
 })

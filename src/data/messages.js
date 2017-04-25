@@ -20,6 +20,9 @@ const possibleYesBlocks = [
   {text: 'I always knew you loved me', emoji: 'heart_eyes'},
   {text: 'Cool dude', emoji: 'sunglasses'},
   {text: 'That\'s what I thought', emoji: 'smirk'},
+  {text: 'Thank you!', emoji: 'hugging_face'},
+  {text: 'ROCK ON', emoji: 'the_horns'},
+  {text: 'This contact will see another day', emoji: 'city_sunrise'},
 ]
 
 const possibleDeniedBlocks = [
@@ -36,6 +39,10 @@ const possibleDeniedBlocks = [
   {text: 'This contact has become radioactive', emoji: 'radioactive_sign'},
   {text: 'Awww shucks', emoji: 'pensive'},
   {text: 'Peace out brah', emoji: 'v'},
+  {text: 'The bus stops here!', emoji: 'bus'},
+  {text: 'Putting a ban on this contact', emoji: 'no_entry_sign'},
+  {text: 'Watch this contact walk away', emoji: 'walking'},
+  {text: 'The sun sets on this contact', emoji: 'city_sunset'},
 ]
 
 export {
