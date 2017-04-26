@@ -18,7 +18,6 @@ export default class DeleteContacts extends Component {
     }
 
     componentDidMount() {
-        console.log('InteractionManager', InteractionManager)
         InteractionManager.runAfterInteractions(() =>
             this.setState({ renderPlaceholderOnly: false })
         );
@@ -51,13 +50,13 @@ export default class DeleteContacts extends Component {
                         })
                     }}
                 />
-
-                            <List
-                                data={this.props.contactsToDelete}
-                                removeContactToBeDelete={this.props.removeContactToBeDelete}
-                            />
-
-
+                {this.state.renderPlaceholderOnly
+                    ? <View><Text>Loading</Text></View>
+                    : <List
+                            data={this.props.contactsToDelete}
+                            removeContactToBeDelete={this.props.removeContactToBeDelete}
+                        />
+                }
             </View>
         )
     }
