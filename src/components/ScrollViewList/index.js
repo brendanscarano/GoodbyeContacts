@@ -7,7 +7,6 @@ import {
     ListView,
     ScrollView,
 } from 'react-native';
-// import styles from './styles';
 
 export default function ScrollViewList(props) {
     console.log("props", props);
