@@ -32,6 +32,8 @@ export default class List extends Component {
                 <TouchableHighlight
                     style={styles.cancel}
                     onPress={() => {
+                        this.props.removeContactToBeDelete(this.props.data, item.recordID)
+
                         const indexToRemove = this.state.data.findIndex((element) => element.recordID === item.recordID);
                         const newArray = this.state.data.slice();
                         newArray.splice(indexToRemove, 1);
@@ -41,7 +43,6 @@ export default class List extends Component {
                             dataSource: this.state.dataSource.cloneWithRows(newArray),
                         });
 
-                        this.props.removeContactToBeDelete(this.props.data, item.recordID)
                     }}
                 >
                     <Text style={styles.icon}>X</Text>

@@ -55,6 +55,7 @@ export default function Cards(props) {
                     position: 'absolute',
                     top: 0,
                 }}
+                smoothTranisition
                 currentPosition={props.currentContactPosition > props.fullContactsLength ? '' : `${props.currentContactPosition}/${props.fullContactsLength}`}
             />
         </View>

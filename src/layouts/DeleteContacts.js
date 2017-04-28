@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import NavigationBar from 'react-native-navbar';
 import List from '../components/List';
+import ScrollViewList from '../components/ScrollViewList';
 import Contacts from 'react-native-contacts';
 const DELETE_CONFIRMATION = 'DELETE_CONFIRMATION';
 
@@ -37,7 +38,7 @@ export default class DeleteContacts extends Component {
                         handler: () => this.props.navigator.pop()
                     }}
                 />
-                <Button
+                {/*<Button
                     numberOfContacts={this.props.contactsToDelete.length}
                     onPress={() => {
                         deleteContacts(this.props.contactsToDelete)
@@ -49,10 +50,10 @@ export default class DeleteContacts extends Component {
                             }
                         })
                     }}
-                />
+                />*/}
                 {this.state.renderPlaceholderOnly
                     ? <View><Text>Loading</Text></View>
-                    : <List
+                    : <ScrollViewList
                             data={this.props.contactsToDelete}
                             removeContactToBeDelete={this.props.removeContactToBeDelete}
                         />
