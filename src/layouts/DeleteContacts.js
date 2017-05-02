@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {
     View,
     Text,
-    StyleSheet,
     TouchableHighlight,
     AsyncStorage,
     InteractionManager,
@@ -11,6 +10,7 @@ import NavigationBar from 'react-native-navbar';
 import List from '../components/List';
 import ScrollViewList from '../components/ScrollViewList';
 import Contacts from 'react-native-contacts';
+import styles from './DeleteContactsStyle';
 const DELETE_CONFIRMATION = 'DELETE_CONFIRMATION';
 
 export default class DeleteContacts extends Component {
@@ -38,7 +38,7 @@ export default class DeleteContacts extends Component {
                         handler: () => this.props.navigator.pop()
                     }}
                 />
-                {/*<Button
+                <Button
                     numberOfContacts={this.props.contactsToDelete.length}
                     onPress={() => {
                         deleteContacts(this.props.contactsToDelete)
@@ -50,7 +50,7 @@ export default class DeleteContacts extends Component {
                             }
                         })
                     }}
-                />*/}
+                />
                 {this.state.renderPlaceholderOnly
                     ? <View><Text>Loading</Text></View>
                     : <ScrollViewList
@@ -87,36 +87,7 @@ function Button(props) {
             style={styles.buttonWrapper}
             onPress={props.onPress}
         >
-            <Text style={styles.buttonText}>{`Delete ${props.numberOfContacts} ${text}`}</Text>
+            <Text style={styles.buttonText}>{`Permenantly Delete ${props.numberOfContacts} ${text}`}</Text>
         </TouchableHighlight>
     )
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        borderWidth: 2,
-        borderColor: 'orange',
-        backgroundColor: '#fff',
-    },
-    buttonWrapper: {
-        backgroundColor: 'red',
-        borderWidth: 1,
-        borderColor: 'red',
-        height: 40,
-        borderRadius: 5,
-        marginVertical: 20,
-        marginHorizontal: 5,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    buttonText: {
-        textAlign: 'center',
-        alignItems: 'center',
-        justifyContent: 'center',
-        color: '#fff',
-        fontWeight: 'bold',
-        fontSize: 16,
-    },
-})
-

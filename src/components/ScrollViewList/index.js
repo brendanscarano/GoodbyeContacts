@@ -7,6 +7,9 @@ import {
     ListView,
     ScrollView,
 } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import ContactImage from '../ContactImage';
+import colors from '../../utils/colors';
 
 export default function ScrollViewList(props) {
     console.log("props", props);
@@ -19,14 +22,22 @@ export default function ScrollViewList(props) {
 
                     return (
                         <View style={styles.contact} key={contact.recordID}>
-                            <Text style={styles.name}>{fullName}</Text>
+                            <View style={styles.contactWrapper}>
+                                <ContactImage
+                                    iconWrapperStyles={styles.iconWrapper}
+                                    iconSize={30}
+                                    iconStyles={styles.icon}
+                                />
+                                <Text style={styles.name}>{fullName}</Text>
+                            </View>
                             <TouchableHighlight
-                                style={styles.cancel}
                                 onPress={() => {
                                     props.removeContactToBeDelete(props.data, contact.recordID)
                                 }}
+                                style={styles.closeIcon}
+                                underlayColor={colors.background}
                             >
-                                <Text style={styles.icon}>X</Text>
+                                <Icon name="close" size={28} color={colors.gray[5]} />
                             </TouchableHighlight>
                         </View>
                     )
@@ -46,16 +57,31 @@ const styles = StyleSheet.create({
         borderTopColor: '#ddd',
         position: 'relative',
         flexDirection: 'row',
-        justifyContent: 'space-between'
+        alignItems: 'center',
+        justifyContent: 'space-between',
+    },
+    contactWrapper: {
+        flexDirection: 'row',
+        alignItems: 'center',
     },
     name: {
         fontSize: 16,
+        marginLeft: 10,
+    },
+    iconWrapper: {
+        width: 40,
+        height: 40,
+        borderRadius: 50/2,
+    },
+    closeIcon: {
+        width: 40,
+        height: 40,
+        borderWidth: 1,
+        borderColor: 'red',
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     icon: {
-        width: 48,
-        height: 48,
-        borderWidth: 2,
-        borderColor: 'green',
-        fontWeight: 'bold',
-    }
+        marginTop: 4,
+    },
 })

@@ -5,22 +5,14 @@ import {
     View,
 } from 'react-native';
 import colors from '../../utils/colors';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import ContactImage from '../ContactImage'
 
 export default function Card(props) {
-    console.log("props", props);
     const fullName = `${props.givenName} ${props.familyName || ''}`;
 
     return (
         <View style={styles.card}>
-            <View style={styles.iconWrapper}>
-                <Icon
-                    name="user"
-                    color={colors.gray[0]}
-                    size={60}
-                    style={styles.icon}
-                />
-            </View>
+            <ContactImage />
             <Text style={styles.name}>{fullName}</Text>
         </View>
     )
@@ -46,15 +38,4 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         color: colors.white,
     },
-    iconWrapper: {
-        width: 80,
-        height: 80,
-        borderRadius: 100/2,
-        backgroundColor: colors.gray[1],
-    },
-    icon: {
-        backgroundColor: colors.gray[1],
-        marginTop: 10,
-        alignSelf: 'center',
-    }
 })

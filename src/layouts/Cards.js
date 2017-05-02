@@ -25,7 +25,7 @@ export default function Cards(props) {
         props.data.length ?
         <View style={styles.container}>
             <NavigationBar
-                title={{title: "GoodbyeContacts"}}
+                title={{title: "Goodbye Contacts"}}
                 style={{
                     backgroundColor: colors.background,
                 }}
