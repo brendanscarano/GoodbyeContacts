@@ -37,11 +37,11 @@ export default function BottomBar(props) {
                 style={styles.deleteButton}
                 onPress={props.contactsToDeleteLength ? navigateToDeleteScreen : () => null}
             >
-                <View>
+                <View style={styles.deleteButtonTextWrapper}>
                     <Text style={styles.deleteButtonText}>
                         {`Delete ${props.contactsToDeleteLength}`}
                     </Text>
-                    <Icon name="angle-right" style={styles.icon} size={20} />
+                    <Icon name="angle-right" style={styles.icon} size={20} color={colors.red} />
                 </View>
             </TouchableHighlight>
         </View>

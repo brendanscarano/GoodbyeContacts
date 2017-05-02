@@ -35,8 +35,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     text: {
-        fontSize: 32,
+        fontSize: 28,
         marginLeft: 6,
         color: colors.gray[5],
+        flexWrap: 'wrap',
     }
 })

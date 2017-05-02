@@ -12,9 +12,9 @@ export default StyleSheet.create({
         bottom: 0,
         right: 0,
         left: 0,
-        paddingTop: 10,
     },
     startOverButton: {
+        marginTop: 15,
         backgroundColor: colors.green,
         borderColor: colors.green,
         borderWidth: 1,
@@ -34,6 +34,7 @@ export default StyleSheet.create({
         fontSize: 16,
     },
     deleteButton: {
+        marginTop: 15,
         backgroundColor: colors.lightBlue,
         borderColor: colors.lightBlue,
         borderWidth: 10,
@@ -43,6 +44,9 @@ export default StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    deleteButtonTextWrapper: {
+        flexDirection: 'row',
+    },
     deleteButtonText: {
         color: colors.red,
         fontWeight: 'bold',
@@ -50,12 +54,13 @@ export default StyleSheet.create({
     },
     halfCircle: {
         backgroundColor: colors.blue,
-        // borderRightWidth: 6,
-        // borderLeftWidth: 6,
-        // borderBottomWidth: 6,
-        // borderRightColor: 'yellow',
-        // borderLeftColor: 'yellow',
-        // borderBottomColor: 'yellow',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: 35,
+        width: 70,
+        borderBottomLeftRadius:27.5,
+        borderBottomRightRadius:27.5,
     },
     halfCircleText: {
         color: colors.white,
@@ -64,7 +69,6 @@ export default StyleSheet.create({
         fontSize: 18,
     },
     icon: {
-        marginLeft: 12,
-        paddingLeft: 12,
+        marginLeft: 6,
     }
 })
