@@ -5,6 +5,7 @@ import {
     View,
 } from 'react-native';
 import colors from '../../utils/colors';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default function Card(props) {
     console.log("props", props);
@@ -12,7 +13,14 @@ export default function Card(props) {
 
     return (
         <View style={styles.card}>
-
+            <View style={styles.iconWrapper}>
+                <Icon
+                    name="user"
+                    color={colors.gray[0]}
+                    size={60}
+                    style={styles.icon}
+                />
+            </View>
             <Text style={styles.name}>{fullName}</Text>
         </View>
     )
@@ -34,8 +42,19 @@ const styles = StyleSheet.create({
         shadowRadius: 2,
     },
     name: {
-        fontSize: 54,
+        fontSize: 42,
         textAlign: 'center',
         color: colors.white,
+    },
+    iconWrapper: {
+        width: 80,
+        height: 80,
+        borderRadius: 100/2,
+        backgroundColor: colors.gray[1],
+    },
+    icon: {
+        backgroundColor: colors.gray[1],
+        marginTop: 10,
+        alignSelf: 'center',
     }
 })

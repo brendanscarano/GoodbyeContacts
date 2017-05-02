@@ -26,33 +26,15 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   yup: {
-    borderColor: 'green',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderWidth: 2,
     position: 'absolute',
     top: 40,
-    alignSelf: 'center',
     padding: 20,
-    borderRadius: 5,
-  },
-  yupText: {
-    fontSize: 16,
-    color: 'green',
   },
   nope: {
-    borderColor: 'red',
-    borderWidth: 2,
     position: 'absolute',
     top: 40,
-    alignSelf: 'center',
     padding: 20,
-    borderRadius: 5,
   },
-  nopeText: {
-    fontSize: 16,
-    color: 'red',
-  }
 });
 
 //Components could be unloaded and loaded and we will loose the users currentIndex, we can persist it here.

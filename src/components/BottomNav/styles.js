@@ -62,5 +62,9 @@ export default StyleSheet.create({
         fontWeight: 'bold',
         margin: 4,
         fontSize: 18,
+    },
+    icon: {
+        marginLeft: 12,
+        paddingLeft: 12,
     }
 })

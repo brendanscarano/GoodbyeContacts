@@ -1,12 +1,19 @@
 import React from 'react';
-import { View, Text, TouchableHighlight } from 'react-native';
+import { View, Text, TouchableHighlight, AsyncStorage } from 'react-native';
 import styles from './styles';
 import colors from '../../utils/colors';
 import RNRestart from 'react-native-restart';
 const DELETE_CONTACTS_SCREEN = 'DELETE_CONTACTS_SCREEN';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default function BottomBar(props) {
-    const restartList = () => RNRestart.Restart()
+    const restartList = () => {
+        AsyncStorage.setItem('lastContactId', '0')
+            .then(res => {
+                RNRestart.Restart();
+            });
+    }
+
     const navigateToDeleteScreen = () => {
         props.navigator.push({
             name: DELETE_CONTACTS_SCREEN
@@ -28,23 +35,15 @@ export default function BottomBar(props) {
 
             <TouchableHighlight
                 style={styles.deleteButton}
-                onPress={navigateToDeleteScreen}
+                onPress={props.contactsToDeleteLength ? navigateToDeleteScreen : () => null}
             >
-                <Text style={styles.deleteButtonText}>{`Delete ${props.contactsToDeleteLength}`}</Text>
+                <View>
+                    <Text style={styles.deleteButtonText}>
+                        {`Delete ${props.contactsToDeleteLength}`}
+                    </Text>
+                    <Icon name="angle-right" style={styles.icon} size={20} />
+                </View>
             </TouchableHighlight>
         </View>
     )
 }
-
-
-// rightButton={{
-//                     title: `Delete ${props.contactsToDeleteLength}`,
-//                     handler: () =>
-//                         props.navigator.push({
-//                             name: DELETE_CONTACTS_SCREEN
-//                         })
-//                 }}
-//                 leftButton={{
-//                     title: 'Start Over',
-//                     handler: props.startOverFunc
-//                 }}

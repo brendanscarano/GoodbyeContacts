@@ -9,4 +9,12 @@ export default {
     red: '#7D1424',
     white: '#fff',
     purple: '#A260AA',
+    gray: [
+        '#fefefe',
+        '#8D8D8D',
+        '#ccc',
+        '#999',
+        '#666',
+        '#333',
+    ]
 }
