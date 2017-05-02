@@ -27,6 +27,8 @@ const styles = StyleSheet.create({
   },
   yup: {
     borderColor: 'green',
+    justifyContent: 'center',
+    alignItems: 'center',
     borderWidth: 2,
     position: 'absolute',
     top: 40,

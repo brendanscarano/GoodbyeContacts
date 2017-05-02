@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableHighlight } from 'react-native';
 import styles from './styles';
+import colors from '../../utils/colors';
 import RNRestart from 'react-native-restart';
 const DELETE_CONTACTS_SCREEN = 'DELETE_CONTACTS_SCREEN';
 
@@ -14,13 +15,16 @@ export default function BottomBar(props) {
     return (
         <View style={styles.container}>
             <TouchableHighlight
-                style={styles.button, styles.startOverButton}
+                style={styles.startOverButton}
                 onPress={restartList}
+                underlayColor={colors.darkGreen}
             >
                 <Text style={styles.startOverText}>Start Over</Text>
             </TouchableHighlight>
 
-            <Text>{props.currentPosition}</Text>
+            <View style={styles.halfCircle}>
+                <Text style={styles.halfCircleText}>{props.currentPosition}</Text>
+            </View>
 
             <TouchableHighlight
                 style={styles.deleteButton}

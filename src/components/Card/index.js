@@ -4,13 +4,15 @@ import {
     Text,
     View,
 } from 'react-native';
+import colors from '../../utils/colors';
 
 export default function Card(props) {
-    // console.log("props", props);
+    console.log("props", props);
     const fullName = `${props.givenName} ${props.familyName || ''}`;
 
     return (
-        <View style={[styles.card, {backgroundColor: props.backgroundColor}]}>
+        <View style={styles.card}>
+
             <Text style={styles.name}>{fullName}</Text>
         </View>
     )
@@ -20,14 +22,20 @@ const styles = StyleSheet.create({
     card: {
         justifyContent: 'center',
         alignItems: 'center',
-        width: 300,
-        height: 300,
-        // borderWidth: 2,
-        // borderColor: 'blue',
-        // borderRadius: 10,
+        width: 280,
+        height: 280,
+        borderWidth: 2,
+        borderRadius: 10,
+        borderColor: colors.purple,
+        backgroundColor: colors.purple,
+        shadowColor: '#999',
+        shadowOffset: {width: 3, height: 2},
+        shadowOpacity: 1.0,
+        shadowRadius: 2,
     },
     name: {
-        fontSize: 64,
+        fontSize: 54,
         textAlign: 'center',
+        color: colors.white,
     }
 })

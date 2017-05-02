@@ -4,12 +4,10 @@ import colors from '../../utils/colors';
 export default StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: colors.background,
+        backgroundColor: colors.lightBlue,
         flexDirection: 'row',
         justifyContent: 'space-around',
-        height: 60,
-        borderTopWidth: 1,
-        borderTopColor: 'red',
+        height: 70,
         position: 'absolute',
         bottom: 0,
         right: 0,
@@ -19,12 +17,16 @@ export default StyleSheet.create({
     startOverButton: {
         backgroundColor: colors.green,
         borderColor: colors.green,
-        borderWidth: 10,
+        borderWidth: 1,
         borderRadius: 64,
         height: 30,
-        width: 120,
+        width: 100,
         alignItems: 'center',
         justifyContent: 'center',
+        shadowColor: '#999',
+        shadowOffset: {width: 1, height: 2},
+        shadowOpacity: 1.0,
+        shadowRadius: 1,
     },
     startOverText: {
         color: colors.white,
@@ -32,8 +34,8 @@ export default StyleSheet.create({
         fontSize: 16,
     },
     deleteButton: {
-        backgroundColor: colors.background,
-        borderColor: colors.background,
+        backgroundColor: colors.lightBlue,
+        borderColor: colors.lightBlue,
         borderWidth: 10,
         borderRadius: 64,
         height: 30,
@@ -45,5 +47,20 @@ export default StyleSheet.create({
         color: colors.red,
         fontWeight: 'bold',
         fontSize: 16,
+    },
+    halfCircle: {
+        backgroundColor: colors.blue,
+        // borderRightWidth: 6,
+        // borderLeftWidth: 6,
+        // borderBottomWidth: 6,
+        // borderRightColor: 'yellow',
+        // borderLeftColor: 'yellow',
+        // borderBottomColor: 'yellow',
+    },
+    halfCircleText: {
+        color: colors.white,
+        fontWeight: 'bold',
+        margin: 4,
+        fontSize: 18,
     }
 })
