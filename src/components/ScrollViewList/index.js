@@ -21,28 +21,40 @@ export default function ScrollViewList(props) {
                     const fullName = `${givenName} ${familyName || ''}`;
 
                     return (
-                        <View style={styles.contact} key={contact.recordID}>
-                            <View style={styles.contactWrapper}>
-                                <ContactImage
-                                    iconWrapperStyles={styles.iconWrapper}
-                                    iconSize={30}
-                                    iconStyles={styles.icon}
-                                />
-                                <Text style={styles.name}>{fullName}</Text>
-                            </View>
-                            <TouchableHighlight
-                                onPress={() => {
-                                    props.removeContactToBeDelete(props.data, contact.recordID)
-                                }}
-                                style={styles.closeIcon}
-                                underlayColor={colors.background}
-                            >
-                                <Icon name="close" size={28} color={colors.gray[5]} />
-                            </TouchableHighlight>
-                        </View>
+                        <ContactToDelete
+                            key={contact.recordID}
+                            {...contact}
+                            fullName={fullName}
+                            removeContactToBeDelete={props.removeContactToBeDelete}
+                            data={props.data}
+                        />
                     )
                 })}
             </ScrollView>
+        </View>
+    )
+}
+
+function ContactToDelete(props) {
+    return (
+        <View style={styles.contact} key={props.recordID}>
+            <View style={styles.contactWrapper}>
+                <ContactImage
+                    iconWrapperStyles={styles.iconWrapper}
+                    iconSize={30}
+                    iconStyles={styles.icon}
+                />
+                <Text style={styles.name}>{props.fullName}</Text>
+            </View>
+            <TouchableHighlight
+                onPress={() => {
+                    props.removeContactToBeDelete(props.data, props.recordID)
+                }}
+                style={styles.closeIcon}
+                underlayColor={colors.background}
+            >
+                <Icon name="close" size={28} color={colors.gray[5]} />
+            </TouchableHighlight>
         </View>
     )
 }

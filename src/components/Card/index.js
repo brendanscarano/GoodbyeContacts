@@ -8,11 +8,15 @@ import colors from '../../utils/colors';
 import ContactImage from '../ContactImage'
 
 export default function Card(props) {
+    console.log("props", props);
     const fullName = `${props.givenName} ${props.familyName || ''}`;
 
     return (
         <View style={styles.card}>
-            <ContactImage />
+            <ContactImage
+                hasThumbnail={props.hasThumbnail}
+                thumbnailPath={props.thumbnailPath}
+            />
             <Text style={styles.name}>{fullName}</Text>
         </View>
     )
