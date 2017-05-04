@@ -44,6 +44,10 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 85,
     flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  warningTextWrapper: {
+    flexDirection: 'column',
   },
   warningText: {
     color: colors.white,
@@ -458,9 +462,6 @@ export default class SwipeCards extends Component {
   }
 
   render() {
-    console.log(this.props);
-    console.log(this.state.card);
-
     return (
       <View style={styles.container}>
         {this.renderNope()}
@@ -480,7 +481,10 @@ function Warning() {
   return (
       <View style={styles.warning}>
         <Emoji name="hand" />
-        <Text style={styles.warningText}>You put this contact in the delete pile before. Swiping left keeps it there, swipe right to save it!</Text>
+        <View style={styles.warningTextWrapper}>
+          <Text style={styles.warningText}>You put this contact in the delete pile before. </Text>
+          <Text style={styles.warningText}>Swiping left keeps it there, swipe right to save it!</Text>
+        </View>
       </View>
   )
 }

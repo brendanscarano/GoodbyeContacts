@@ -48,18 +48,27 @@ export default class App extends Component {
     }
 
     handleNope = ({ recordID }) => {
-        AsyncStorage.multiSet([
-            ['lastContactId', recordID],
-            ['contactsToDeleteArray', JSON.stringify([...this.props.contactsToDeleteIDs, recordID])]
-        ]).then(res => {
-            this.props.addContactToDelete(recordID, this.props.currentContactPosition);
-        });
+        if (this.props.contactsToDeleteIDs.includes(recordID)) {
+            AsyncStorage.setItem('lastContactId', recordID)
+        } else {
+            AsyncStorage.multiSet([
+                ['lastContactId', recordID],
+                ['contactsToDeleteArray', JSON.stringify([...this.props.contactsToDeleteIDs, recordID])]
+            ]).then(res => {
+                this.props.addContactToDelete(recordID, this.props.currentContactPosition);
+            });
+        }
     }
 
     handleYup = ({ recordID }) => {
-        AsyncStorage.setItem('lastContactId', recordID).then(res => {
-            this.props.updateCurrentIndex(this.props.currentContactPosition);
-        });
+        console.log("this.props.contactsToDeleteIDs.includes(recordID)", this.props.contactsToDeleteIDs.includes(recordID));
+        if (this.props.contactsToDeleteIDs.includes(recordID)) {
+            this.props.removeContactToBeDeleted(this.props.contactsToDelete, recordID)
+        } else {
+            AsyncStorage.setItem('lastContactId', recordID).then(res => {
+                this.props.updateCurrentIndex(this.props.currentContactPosition);
+            });
+        }
     }
 
     startOver = () => {
@@ -91,7 +100,7 @@ export default class App extends Component {
             return <DeleteContacts
                         navigator={navigator}
                         route={route}
-                        removeContactToBeDelete={this.props.removeContactToBeDeleted}
+                        removeContactToBeDeleted={this.props.removeContactToBeDeleted}
                         contactsToDelete={this.props.contactsToDelete}
                         {...route.passProps}
                     />
@@ -119,10 +128,6 @@ export default class App extends Component {
 // ----------------------
 // Selectors
 // ----------------------
-function contactsToCycleThrough({ allContacts, currentContactPosition }) {
-
-}
-
 function contactsToDeleteArray({ allContacts, contactsToDelete }) {
     return allContacts.filter(contact => contactsToDelete.includes(contact.recordID));
 }

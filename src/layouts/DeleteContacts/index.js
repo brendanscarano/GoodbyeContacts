@@ -64,7 +64,7 @@ export default class DeleteContacts extends Component {
                         </View>
                     : <ScrollViewList
                             data={this.props.contactsToDelete}
-                            removeContactToBeDelete={this.props.removeContactToBeDelete}
+                            removeContactToBeDeleted={this.props.removeContactToBeDeleted}
                         />
                 }
             </View>
