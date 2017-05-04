@@ -6,6 +6,7 @@ export default {
     lightBlue: '#BBD5ED',
     blue: '#5696D4',
     orange: '#F24D16',
+    warning: '#F1C40F',
     red: '#7D1424',
     white: '#fff',
     purple: '#A260AA',

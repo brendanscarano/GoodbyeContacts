@@ -6,10 +6,10 @@ import {
     ActivityIndicator,
     TouchableHighlight,
 } from 'react-native';
-import SwipeCards from '../../react-native-swipe-cards/SwipeCards';
 import { possibleYesBlocks, possibleDeniedBlocks } from '../../data/messages';
 
 import NavigationBar from 'react-native-navbar';
+import SwipeCards from '../../components/SwipeCards';
 import Card from '../../components/Card';
 import Message from '../../components/Message';
 import BottomNav from '../../components/BottomNav';
@@ -53,6 +53,7 @@ export default function Cards(props) {
                     position: 'absolute',
                     top: 0,
                 }}
+                contactsToDeleteIDs={props.contactsToDeleteIDs}
             />
             <BottomNav
                 contactsToDeleteLength={props.contactsToDeleteLength}

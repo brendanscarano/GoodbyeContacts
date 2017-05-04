@@ -13,8 +13,9 @@ import {
 } from 'react-native';
 
 import clamp from 'clamp';
-
+import colors from '../../utils/colors';
 import Defaults from './Defaults.js';
+import Emoji from 'react-native-emoji';
 
 const SWIPE_THRESHOLD = 120;
 
@@ -34,6 +35,20 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 40,
     padding: 20,
+  },
+  warning: {
+    backgroundColor: colors.warning,
+    padding: 10,
+    right: 10,
+    left: 10,
+    position: 'absolute',
+    bottom: 85,
+    flexDirection: 'row',
+  },
+  warningText: {
+    color: colors.white,
+    fontSize: 12,
+    fontWeight: 'bold',
   },
 });
 
@@ -65,7 +80,8 @@ export default class SwipeCards extends Component {
     onClickHandler: React.PropTypes.func,
     renderCard: React.PropTypes.func,
     cardRemoved: React.PropTypes.func,
-    dragY: React.PropTypes.bool
+    dragY: React.PropTypes.bool,
+    contactsToDeleteIDs: React.PropTypes.array,
   };
 
   static defaultProps = {
@@ -299,7 +315,6 @@ export default class SwipeCards extends Component {
    * Returns current card object
    */
   getCurrentCard() {
-      console.log("this.state.cards[currentIndex[this.guid]]", this.state.cards[currentIndex[this.guid]]);
       return this.state.cards[currentIndex[this.guid]];
   }
 
@@ -377,12 +392,6 @@ export default class SwipeCards extends Component {
       return this.renderNoMoreCards();
     }
 
-    console.log("this.state.card", this.state.card);
-    if (this.state.card.recordID === "C41D5743-E7B0-49D8-8C9E-F992CB1B8C27") {
-      console.log('true true true')
-      this.renderYup();
-    }
-
     let {pan, enter} = this.state;
     let [translateX, translateY] = [pan.x, pan.y];
 
@@ -449,12 +458,29 @@ export default class SwipeCards extends Component {
   }
 
   render() {
+    console.log(this.props);
+    console.log(this.state.card);
+
     return (
       <View style={styles.container}>
         {this.renderNope()}
         {this.renderYup()}
         {this.props.stack ? this.renderStack() : this.renderCard()}
+
+        {(this.state.card && this.props.contactsToDeleteIDs.includes(this.state.card.recordID)) && (
+            <Warning />
+          )}
+
       </View>
     );
   }
+}
+
+function Warning() {
+  return (
+      <View style={styles.warning}>
+        <Emoji name="hand" />
+        <Text style={styles.warningText}>You put this contact in the delete pile before. Swiping left keeps it there, swipe right to save it!</Text>
+      </View>
+  )
 }

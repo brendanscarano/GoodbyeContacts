@@ -27,15 +27,6 @@ const DELETE_CONFIRMATION = 'DELETE_CONFIRMATION';
 @connect(
     state => {
         console.log('state in connect', state)
-
-        /**
-
-            ONLY CONTACTS THAT AREN'T SELECTED
-            TO BE DELETED SHOULD BE ABLE TO BE CYCLED
-            THROUGH!!!
-
-        */
-
         return ({
             loaded: state.contactsReducer.loaded,
             loading: state.contactsReducer.loading,
@@ -93,6 +84,7 @@ export default class App extends Component {
 
                         handleYup={this.handleYup}
                         handleNope={this.handleNope}
+                        contactsToDeleteIDs={this.props.contactsToDeleteIDs}
                     />
         }
         if (route.name === DELETE_CONTACTS_SCREEN) {
