@@ -20,7 +20,7 @@ export default StyleSheet.create({
         borderWidth: 1,
         borderRadius: 64,
         height: 30,
-        width: 100,
+        width: 120,
         alignItems: 'center',
         justifyContent: 'center',
         shadowColor: '#999',
@@ -31,7 +31,7 @@ export default StyleSheet.create({
     startOverText: {
         color: colors.white,
         fontWeight: 'bold',
-        fontSize: 16,
+        fontSize: 18,
     },
     deleteButton: {
         marginTop: 15,
@@ -44,13 +44,25 @@ export default StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    deleteButtonNotClickable: {
+        marginTop: 15,
+        backgroundColor: colors.lightBlue,
+        borderColor: colors.lightBlue,
+        borderWidth: 10,
+        borderRadius: 64,
+        height: 30,
+        width: 120,
+        alignItems: 'center',
+        justifyContent: 'center',
+        opacity: .4,
+    },
     deleteButtonTextWrapper: {
         flexDirection: 'row',
     },
     deleteButtonText: {
         color: colors.red,
         fontWeight: 'bold',
-        fontSize: 16,
+        fontSize: 18,
     },
     halfCircle: {
         backgroundColor: colors.blue,
@@ -70,5 +82,5 @@ export default StyleSheet.create({
     },
     icon: {
         marginLeft: 6,
-    }
+    },
 })

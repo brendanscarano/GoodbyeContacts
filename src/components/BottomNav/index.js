@@ -34,8 +34,9 @@ export default function BottomBar(props) {
             </View>
 
             <TouchableHighlight
-                style={styles.deleteButton}
+                style={props.contactsToDeleteLength ? styles.deleteButton : styles.deleteButtonNotClickable}
                 onPress={props.contactsToDeleteLength ? navigateToDeleteScreen : () => null}
+                underlayColor={colors.lightBlue}
             >
                 <View style={styles.deleteButtonTextWrapper}>
                     <Text style={styles.deleteButtonText}>

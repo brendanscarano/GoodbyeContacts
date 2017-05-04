@@ -299,6 +299,7 @@ export default class SwipeCards extends Component {
    * Returns current card object
    */
   getCurrentCard() {
+      console.log("this.state.cards[currentIndex[this.guid]]", this.state.cards[currentIndex[this.guid]]);
       return this.state.cards[currentIndex[this.guid]];
   }
 
@@ -374,6 +375,12 @@ export default class SwipeCards extends Component {
   renderCard() {
     if (!this.state.card) {
       return this.renderNoMoreCards();
+    }
+
+    console.log("this.state.card", this.state.card);
+    if (this.state.card.recordID === "C41D5743-E7B0-49D8-8C9E-F992CB1B8C27") {
+      console.log('true true true')
+      this.renderYup();
     }
 
     let {pan, enter} = this.state;

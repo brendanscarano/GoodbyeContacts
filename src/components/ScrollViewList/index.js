@@ -36,6 +36,7 @@ export default function ScrollViewList(props) {
 }
 
 function ContactToDelete(props) {
+    console.log("props", props);
     return (
         <View style={styles.contact} key={props.recordID}>
             <View style={styles.contactWrapper}>
@@ -43,6 +44,8 @@ function ContactToDelete(props) {
                     iconWrapperStyles={styles.iconWrapper}
                     iconSize={30}
                     iconStyles={styles.icon}
+                    hasThumbnail={props.hasThumbnail}
+                    thumbnailPath={props.thumbnailPath}
                 />
                 <Text style={styles.name}>{props.fullName}</Text>
             </View>
@@ -88,8 +91,6 @@ const styles = StyleSheet.create({
     closeIcon: {
         width: 40,
         height: 40,
-        borderWidth: 1,
-        borderColor: 'red',
         alignItems: 'center',
         justifyContent: 'center',
     },

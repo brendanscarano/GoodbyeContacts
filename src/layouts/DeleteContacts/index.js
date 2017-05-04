@@ -5,12 +5,14 @@ import {
     TouchableHighlight,
     AsyncStorage,
     InteractionManager,
+    ActivityIndicator,
 } from 'react-native';
 import NavigationBar from 'react-native-navbar';
-import List from '../components/List';
-import ScrollViewList from '../components/ScrollViewList';
+import List from '../../components/List';
+import ScrollViewList from '../../components/ScrollViewList';
 import Contacts from 'react-native-contacts';
-import styles from './DeleteContactsStyle';
+import styles from './styles';
+import colors from '../../utils/colors';
 const DELETE_CONFIRMATION = 'DELETE_CONFIRMATION';
 
 export default class DeleteContacts extends Component {
@@ -25,13 +27,15 @@ export default class DeleteContacts extends Component {
     }
 
     render() {
-        console.log(this.props);
         return (
             <View style={styles.container}>
                 <NavigationBar
                     style={{
                         borderBottomWidth: 1,
                         borderBottomColor: '#ccc'
+                    }}
+                    containerStyle={{
+                        backgroundColor: colors.background,
                     }}
                     leftButton={{
                         title: 'Back',
@@ -40,19 +44,24 @@ export default class DeleteContacts extends Component {
                 />
                 <Button
                     numberOfContacts={this.props.contactsToDelete.length}
-                    onPress={() => {
-                        deleteContacts(this.props.contactsToDelete)
+                    onPress={this.props.contactsToDelete.length
+                        ? () => {
+                            deleteContacts(this.props.contactsToDelete)
 
-                        this.props.navigator.push({
-                            name: DELETE_CONFIRMATION,
-                            passProps: {
-                                numContactsDeleted: this.props.contactsToDelete.length
+                            this.props.navigator.push({
+                                name: DELETE_CONFIRMATION,
+                                passProps: {
+                                    numContactsDeleted: this.props.contactsToDelete.length
                             }
-                        })
-                    }}
+                            })
+                        }
+                    : () => null
+                    }
                 />
                 {this.state.renderPlaceholderOnly
-                    ? <View><Text>Loading</Text></View>
+                    ? <View style={styles.container}>
+                            <ActivityIndicator />
+                        </View>
                     : <ScrollViewList
                             data={this.props.contactsToDelete}
                             removeContactToBeDelete={this.props.removeContactToBeDelete}
@@ -84,7 +93,7 @@ function Button(props) {
     const text = props.numberOfContacts === 1 ? 'Contact' : 'Contacts';
     return (
         <TouchableHighlight
-            style={styles.buttonWrapper}
+            style={props.numberOfContacts > 0 ? styles.buttonWrapper : styles.notClickableButtonWrapper}
             onPress={props.onPress}
         >
             <Text style={styles.buttonText}>{`Permenantly Delete ${props.numberOfContacts} ${text}`}</Text>

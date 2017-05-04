@@ -6,15 +6,15 @@ import {
     ActivityIndicator,
     TouchableHighlight,
 } from 'react-native';
-import SwipeCards from '../react-native-swipe-cards/SwipeCards';
-import { possibleYesBlocks, possibleDeniedBlocks } from '../data/messages';
+import SwipeCards from '../../react-native-swipe-cards/SwipeCards';
+import { possibleYesBlocks, possibleDeniedBlocks } from '../../data/messages';
 
 import NavigationBar from 'react-native-navbar';
-import Card from '../components/Card';
-import Message from '../components/Message';
-import BottomNav from '../components/BottomNav';
-import styles from './CardsStyle.js';
-import colors from '../utils/colors';
+import Card from '../../components/Card';
+import Message from '../../components/Message';
+import BottomNav from '../../components/BottomNav';
+import styles from './styles.js';
+import colors from '../../utils/colors';
 
 export default function Cards(props) {
     const randomYes = randomNumber(possibleYesBlocks);
@@ -25,8 +25,17 @@ export default function Cards(props) {
         props.data.length ?
         <View style={styles.container}>
             <NavigationBar
-                title={{title: "Goodbye Contacts"}}
+                title={{
+                    title: "Goodbye Contacts",
+                    style: {
+                        fontWeight: 'bold',
+                        fontSize: 18,
+                    }
+                }}
                 style={{
+                    backgroundColor: colors.background,
+                }}
+                containerStyle={{
                     backgroundColor: colors.background,
                 }}
             />
@@ -44,15 +53,14 @@ export default function Cards(props) {
                     position: 'absolute',
                     top: 0,
                 }}
-                smoothTranisition
             />
             <BottomNav
                 contactsToDeleteLength={props.contactsToDeleteLength}
-                currentPosition={props.currentContactPosition > props.fullContactsLength ? '' : `${props.currentContactPosition}/${props.fullContactsLength}`}
+                currentPosition={props.currentContactPosition > props.fullContactsLength ? 'End' : `${props.currentContactPosition}/${props.fullContactsLength}`}
                 navigator={props.navigator}
             />
         </View>
-        : <Loading />
+        : <View style={styles.loadingContainer} />
     )
 }
 
@@ -60,25 +68,17 @@ function randomNumber(array) {
     return array[Math.floor(Math.random() * array.length)];
 }
 
-function Loading() {
-    return (
-        <View style={styles.innerContainer}>
-            <Text>Loading contacts...so they can be destroyed!</Text>
-            <ActivityIndicator />
-        </View>
-    )
-}
-
 function NoMoreCards(props) {
     console.log("props", props);
     return (
-        <View style={styles.innerContainer}>
-            <Text>There are no more contacts left, Goodbye!</Text>
+        <View style={styles.noMoreCardsWrapper}>
+            <Text style={styles.noMoreContactsText}>There are no more contacts left!</Text>
             <TouchableHighlight
                 onPress={props.onPress}
-                style={styles.startOver}
+                style={styles.startOverButton}
+                underlayColor={colors.darkGreen}
             >
-                <Text>Start Over</Text>
+                <Text style={styles.startOverText}>Back to beginning</Text>
             </TouchableHighlight>
         </View>
     )
