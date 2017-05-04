@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
     StyleSheet,
     Text,
@@ -10,9 +10,9 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 import ContactImage from '../ContactImage';
 import colors from '../../utils/colors';
+import styles from './styles';
 
 export default function ScrollViewList(props) {
-    console.log("props", props);
     return (
         <View style={styles.container}>
             <ScrollView>
@@ -25,7 +25,7 @@ export default function ScrollViewList(props) {
                             key={contact.recordID}
                             {...contact}
                             fullName={fullName}
-                            removeContactToBeDelete={props.removeContactToBeDelete}
+                            removeContactToBeDeleted={props.removeContactToBeDeleted}
                             data={props.data}
                         />
                     )
@@ -51,7 +51,7 @@ function ContactToDelete(props) {
             </View>
             <TouchableHighlight
                 onPress={() => {
-                    props.removeContactToBeDelete(props.data, props.recordID)
+                    props.removeContactToBeDeleted(props.data, props.recordID)
                 }}
                 style={styles.closeIcon}
                 underlayColor={colors.background}
@@ -61,40 +61,3 @@ function ContactToDelete(props) {
         </View>
     )
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
-    contact: {
-        padding: 20,
-        borderTopWidth: 1,
-        borderTopColor: '#ddd',
-        position: 'relative',
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-    },
-    contactWrapper: {
-        flexDirection: 'row',
-        alignItems: 'center',
-    },
-    name: {
-        fontSize: 16,
-        marginLeft: 10,
-    },
-    iconWrapper: {
-        width: 40,
-        height: 40,
-        borderRadius: 50/2,
-    },
-    closeIcon: {
-        width: 40,
-        height: 40,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    icon: {
-        marginTop: 4,
-    },
-})
