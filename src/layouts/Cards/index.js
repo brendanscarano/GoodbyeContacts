@@ -12,6 +12,7 @@ import SwipeCards from '../../components/SwipeCards';
 import Card from '../../components/Card';
 import Message from '../../components/Message';
 import BottomNav from '../../components/BottomNav';
+import Emoji from 'react-native-emoji';
 import styles from './styles.js';
 import colors from '../../utils/colors';
 
@@ -23,6 +24,15 @@ export default function Cards(props) {
         props.loaded && !props.data.length ? <NoMoreCards onPress={props.startOverFunc} /> :
         props.data.length ?
         <View style={styles.container}>
+            <View style={styles.emojiWrapper}>
+                <Text style={styles.emojiText}>
+                    <Emoji name="wave"/>
+                </Text>
+                <Text style={styles.emojiText}>
+                    <Emoji name="bust_in_silhouette" />
+                </Text>
+            </View>
+
             <SwipeCards
                 cards={props.data}
                 renderCard={cardData => <Card {...cardData} />}

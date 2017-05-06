@@ -42,7 +42,7 @@ export default function BottomBar(props) {
                     <Text style={styles.deleteButtonText}>
                         {`Delete ${props.contactsToDeleteLength}`}
                     </Text>
-                    <Icon name="angle-right" style={styles.icon} size={20} color={colors.red} />
+                    <Icon name="angle-right" style={styles.icon} size={20} color={colors.thunderRed} />
                 </View>
             </TouchableHighlight>
         </View>

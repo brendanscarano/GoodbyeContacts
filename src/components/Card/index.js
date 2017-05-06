@@ -29,8 +29,8 @@ const styles = StyleSheet.create({
         height: 280,
         borderWidth: 2,
         borderRadius: 10,
-        borderColor: colors.purple,
-        backgroundColor: colors.purple,
+        borderColor: colors.white,
+        backgroundColor: colors.white,
         shadowColor: '#999',
         shadowOffset: {width: 3, height: 2},
         shadowOpacity: 1.0,
@@ -39,6 +39,6 @@ const styles = StyleSheet.create({
     name: {
         fontSize: 42,
         textAlign: 'center',
-        color: colors.white,
+        color: colors.blue,
     },
 })

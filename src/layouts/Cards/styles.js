@@ -42,6 +42,15 @@ export default StyleSheet.create({
     noMoreCardsWrapper: {
         justifyContent: 'center',
         alignItems: 'center',
-    }
+    },
+    emojiWrapper: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: 40,
+    },
+    emojiText: {
+        fontSize: 40,
+    },
 })
 
