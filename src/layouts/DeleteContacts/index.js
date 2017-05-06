@@ -11,7 +11,6 @@ import ScrollViewList from '../../components/ScrollViewList';
 import Contacts from 'react-native-contacts';
 import styles from './styles';
 import colors from '../../utils/colors';
-import Icon from 'react-native-vector-icons/FontAwesome';
 const DELETE_CONFIRMATION = 'DELETE_CONFIRMATION';
 
 export default class DeleteContacts extends Component {
@@ -62,8 +61,7 @@ export default class DeleteContacts extends Component {
                         onPress={this.goBack}
                     >
                         <View style={styles.backButtonWrapper}>
-                            <Icon name="angle-left" size={20} color={colors.gray[5]} />
-                            <Text style={styles.backButtonWrapperText}>Back</Text>
+                            <Text style={styles.backButtonWrapperText}>Back to Contacts</Text>
                         </View>
                     </TouchableHighlight>
                 </View>

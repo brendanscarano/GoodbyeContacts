@@ -33,11 +33,13 @@ const styles = StyleSheet.create({
     messageWrapper: {
         flexDirection: 'row',
         alignItems: 'center',
+        justifyContent: 'center',
+        flexWrap: 'wrap',
     },
     text: {
         fontSize: 28,
         marginLeft: 6,
+        textAlign: 'center',
         color: colors.gray[5],
-        flexWrap: 'wrap',
     }
 })

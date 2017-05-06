@@ -8,7 +8,6 @@ import {
 } from 'react-native';
 import { possibleYesBlocks, possibleDeniedBlocks } from '../../data/messages';
 
-import NavigationBar from 'react-native-navbar';
 import SwipeCards from '../../components/SwipeCards';
 import Card from '../../components/Card';
 import Message from '../../components/Message';
@@ -24,21 +23,6 @@ export default function Cards(props) {
         props.loaded && !props.data.length ? <NoMoreCards onPress={props.startOverFunc} /> :
         props.data.length ?
         <View style={styles.container}>
-            <NavigationBar
-                title={{
-                    title: "Goodbye Contacts",
-                    style: {
-                        fontWeight: 'bold',
-                        fontSize: 18,
-                    }
-                }}
-                style={{
-                    backgroundColor: colors.background,
-                }}
-                containerStyle={{
-                    backgroundColor: colors.background,
-                }}
-            />
             <SwipeCards
                 cards={props.data}
                 renderCard={cardData => <Card {...cardData} />}

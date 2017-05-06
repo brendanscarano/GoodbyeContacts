@@ -47,6 +47,18 @@ export default class App extends Component {
         this.props.fetchContacts();
     }
 
+    shouldComponentUpdate(nextProps, nextState) {
+            console.log("this.props.contactsToDeleteIDs", this.props.contactsToDeleteIDs);
+        console.log("nextProps", nextProps);
+        console.log("nextState", nextState);
+
+        if (this.props.contactsToDeleteIDs.length === nextProps.contactsToDeleteIDs.length) {
+            return false;
+        }
+        return true;
+
+    }
+
     handleNope = ({ recordID }) => {
         if (this.props.contactsToDeleteIDs.includes(recordID)) {
             AsyncStorage.setItem('lastContactId', recordID)
@@ -61,7 +73,6 @@ export default class App extends Component {
     }
 
     handleYup = ({ recordID }) => {
-        console.log("this.props.contactsToDeleteIDs.includes(recordID)", this.props.contactsToDeleteIDs.includes(recordID));
         if (this.props.contactsToDeleteIDs.includes(recordID)) {
             this.props.removeContactToBeDeleted(this.props.contactsToDelete, recordID)
         } else {
@@ -79,6 +90,7 @@ export default class App extends Component {
     }
 
     renderScene = (route, navigator) => {
+        console.log("route", route);
         if (route.name === CARDS_SCREEN) {
             return <Cards
                         navigator={navigator}

@@ -151,6 +151,7 @@ export default class SwipeCards extends Component {
       ]),
 
       onPanResponderRelease: (e, {vx, vy, dx, dy}) => {
+        console.log('releasing!!!')
         this.state.pan.flattenOffset();
         let velocity;
         if ((dx === 0) && (dy === 0))   //meaning the gesture did not cover any distance

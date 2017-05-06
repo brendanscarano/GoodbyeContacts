@@ -42,7 +42,6 @@ export default StyleSheet.create({
         flex: 1,
         backgroundColor: colors.lightBlue,
         flexDirection: 'row',
-        justifyContent: 'flex-start',
         alignItems: 'center',
         paddingHorizontal: 10,
         height: 70,
@@ -52,7 +51,13 @@ export default StyleSheet.create({
         left: 0,
     },
     backButtonWrapper: {
+        alignItems: 'stretch',
+        alignSelf: 'stretch',
+        padding: 10,
         flexDirection: 'row',
+        borderWidth: 1,
+        borderColor: 'green',
+        borderRadius: 15,
 
     },
     backButtonWrapperText: {
