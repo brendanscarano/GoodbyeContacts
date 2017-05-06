@@ -43,6 +43,7 @@ export default StyleSheet.create({
         backgroundColor: colors.lightBlue,
         flexDirection: 'row',
         alignItems: 'center',
+        justifyContent: 'center',
         paddingHorizontal: 10,
         height: 70,
         position: 'absolute',
@@ -51,18 +52,20 @@ export default StyleSheet.create({
         left: 0,
     },
     backButtonWrapper: {
-        alignItems: 'stretch',
-        alignSelf: 'stretch',
-        padding: 10,
-        flexDirection: 'row',
+        backgroundColor: colors.blue,
         borderWidth: 1,
-        borderColor: 'green',
-        borderRadius: 15,
-
+        borderColor: colors.blue,
+        height: 40,
+        borderRadius: 5,
+        marginHorizontal: 5,
+        alignItems: 'center',
+        justifyContent: 'center',
+        flex: 1,
     },
     backButtonWrapperText: {
         marginLeft: 4,
         fontSize: 18,
-        color: colors.gray[5],
+        color: colors.white,
+        fontWeight: 'bold',
     }
 })

@@ -36,13 +36,12 @@ export default function ScrollViewList(props) {
 }
 
 function ContactToDelete(props) {
-    console.log("props", props);
     return (
         <View style={styles.contact} key={props.recordID}>
             <View style={styles.contactWrapper}>
                 <ContactImage
                     iconWrapperStyles={styles.iconWrapper}
-                    iconSize={30}
+                    imageSize={50}
                     iconStyles={styles.icon}
                     hasThumbnail={props.hasThumbnail}
                     thumbnailPath={props.thumbnailPath}

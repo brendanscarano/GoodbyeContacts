@@ -47,17 +47,17 @@ export default class App extends Component {
         this.props.fetchContacts();
     }
 
-    shouldComponentUpdate(nextProps, nextState) {
-            console.log("this.props.contactsToDeleteIDs", this.props.contactsToDeleteIDs);
-        console.log("nextProps", nextProps);
-        console.log("nextState", nextState);
+    // shouldComponentUpdate(nextProps, nextState) {
+    //         console.log("this.props.contactsToDeleteIDs", this.props.contactsToDeleteIDs);
+    //     console.log("nextProps", nextProps);
+    //     console.log("nextState", nextState);
 
-        if (this.props.contactsToDeleteIDs.length === nextProps.contactsToDeleteIDs.length) {
-            return false;
-        }
-        return true;
+    //     if (this.props.contactsToDeleteIDs.length === nextProps.contactsToDeleteIDs.length) {
+    //         return false;
+    //     }
+    //     return true;
 
-    }
+    // }
 
     handleNope = ({ recordID }) => {
         if (this.props.contactsToDeleteIDs.includes(recordID)) {

@@ -59,10 +59,9 @@ export default class DeleteContacts extends Component {
                 <View style={styles.bottomBar}>
                     <TouchableHighlight
                         onPress={this.goBack}
+                        style={styles.backButtonWrapper}
                     >
-                        <View style={styles.backButtonWrapper}>
-                            <Text style={styles.backButtonWrapperText}>Back to Contacts</Text>
-                        </View>
+                        <Text style={styles.backButtonWrapperText}>Back to Contacts</Text>
                     </TouchableHighlight>
                 </View>
             </View>

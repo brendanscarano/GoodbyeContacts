@@ -35,5 +35,6 @@ export default StyleSheet.create({
     },
     icon: {
         marginTop: 4,
+        marginBottom: 0,
     },
 })
