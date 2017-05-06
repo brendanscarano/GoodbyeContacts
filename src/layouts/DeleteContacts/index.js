@@ -7,12 +7,11 @@ import {
     InteractionManager,
     ActivityIndicator,
 } from 'react-native';
-import NavigationBar from 'react-native-navbar';
-import List from '../../components/List';
 import ScrollViewList from '../../components/ScrollViewList';
 import Contacts from 'react-native-contacts';
 import styles from './styles';
 import colors from '../../utils/colors';
+import Icon from 'react-native-vector-icons/FontAwesome';
 const DELETE_CONFIRMATION = 'DELETE_CONFIRMATION';
 
 export default class DeleteContacts extends Component {
@@ -26,23 +25,14 @@ export default class DeleteContacts extends Component {
         );
     }
 
+    goBack = () => {
+        this.props.navigator.pop()
+    }
+
     render() {
         return (
             <View style={styles.container}>
-                <NavigationBar
-                    style={{
-                        borderBottomWidth: 1,
-                        borderBottomColor: '#ccc'
-                    }}
-                    containerStyle={{
-                        backgroundColor: colors.background,
-                    }}
-                    leftButton={{
-                        title: 'Back',
-                        handler: () => this.props.navigator.pop()
-                    }}
-                />
-                <Button
+                <DeleteButton
                     numberOfContacts={this.props.contactsToDelete.length}
                     onPress={this.props.contactsToDelete.length
                         ? () => {
@@ -67,6 +57,16 @@ export default class DeleteContacts extends Component {
                             removeContactToBeDeleted={this.props.removeContactToBeDeleted}
                         />
                 }
+                <View style={styles.bottomBar}>
+                    <TouchableHighlight
+                        onPress={this.goBack}
+                    >
+                        <View style={styles.backButtonWrapper}>
+                            <Icon name="angle-left" size={20} color={colors.gray[5]} />
+                            <Text style={styles.backButtonWrapperText}>Back</Text>
+                        </View>
+                    </TouchableHighlight>
+                </View>
             </View>
         )
     }
@@ -89,7 +89,7 @@ function deleteContacts(contacts) {
     });
 }
 
-function Button(props) {
+function DeleteButton(props) {
     const text = props.numberOfContacts === 1 ? 'Contact' : 'Contacts';
     return (
         <TouchableHighlight

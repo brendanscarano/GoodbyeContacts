@@ -5,6 +5,7 @@ export default StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: colors.background,
+        paddingTop: 40,
     },
     notClickableButtonWrapper: {
         backgroundColor: colors.red,
@@ -37,4 +38,26 @@ export default StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 16,
     },
+    bottomBar: {
+        flex: 1,
+        backgroundColor: colors.lightBlue,
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        paddingHorizontal: 10,
+        height: 70,
+        position: 'absolute',
+        bottom: 0,
+        right: 0,
+        left: 0,
+    },
+    backButtonWrapper: {
+        flexDirection: 'row',
+
+    },
+    backButtonWrapperText: {
+        marginLeft: 4,
+        fontSize: 18,
+        color: colors.gray[5],
+    }
 })
