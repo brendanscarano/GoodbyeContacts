@@ -41,7 +41,7 @@ function ContactToDelete(props) {
             <View style={styles.contactWrapper}>
                 <ContactImage
                     iconWrapperStyles={styles.iconWrapper}
-                    imageSize={50}
+                    imageSize={40}
                     iconStyles={styles.icon}
                     hasThumbnail={props.hasThumbnail}
                     thumbnailPath={props.thumbnailPath}

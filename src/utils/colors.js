@@ -11,7 +11,7 @@ export default {
     lightBlue: '#BBD5ED',
     blue: '#1873d9',
     orange: '#F24D16',
-    warning: '#F1C40F',
+    warning: '#f7e99a',
     red: '#7D1424',
     white: '#fff',
     purple: '#A260AA',

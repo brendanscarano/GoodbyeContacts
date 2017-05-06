@@ -4,7 +4,7 @@ import colors from '../../utils/colors';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default function ContactImage(props) {
-    const borderRadius = (props.imageSize || 100) / 2;
+    const borderRadius = (props.imageSize || 80) / 2;
 
     return (
         <View style={[styles.iconWrapper, props.iconWrapperStyles]}>
@@ -12,8 +12,8 @@ export default function ContactImage(props) {
                 props.hasThumbnail
                     ? <Image
                           style={{
-                              width: props.imageSize || 100,
-                              height: props.imageSize || 100,
+                              width: props.imageSize || 80,
+                              height: props.imageSize || 80,
                               borderRadius,
                           }}
                           source={{ uri: props.thumbnailPath }}
@@ -37,10 +37,10 @@ const styles = StyleSheet.create({
         borderRadius: 100/2,
         backgroundColor: colors.gray[1],
         alignItems: 'center',
-        marginBottom: 20,
     },
     icon: {
         backgroundColor: colors.gray[1],
+        fontSize: 60,
         marginTop: 10,
         alignSelf: 'center',
     },

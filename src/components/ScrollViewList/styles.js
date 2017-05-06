@@ -4,6 +4,7 @@ import colors from '../../utils/colors';
 export default StyleSheet.create({
     container: {
         flex: 1,
+        marginBottom: 49,
     },
     contact: {
         padding: 20,
@@ -17,6 +18,7 @@ export default StyleSheet.create({
     contactWrapper: {
         flexDirection: 'row',
         alignItems: 'center',
+        justifyContent: 'center',
     },
     name: {
         fontSize: 16,
@@ -36,5 +38,6 @@ export default StyleSheet.create({
     icon: {
         marginTop: 4,
         marginBottom: 0,
+        fontSize: 30,
     },
 })

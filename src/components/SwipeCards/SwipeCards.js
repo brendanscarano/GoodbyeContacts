@@ -38,11 +38,13 @@ const styles = StyleSheet.create({
   },
   warning: {
     backgroundColor: colors.warning,
+    borderWidth: 2,
+    borderColor: colors.warning,
     padding: 10,
     right: 10,
     left: 10,
     position: 'absolute',
-    bottom: 85,
+    bottom: 65,
     flexDirection: 'row',
     justifyContent: 'center',
   },
@@ -50,10 +52,13 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
   warningText: {
-    color: colors.white,
+    color: colors.gray[5],
     fontSize: 12,
     fontWeight: 'bold',
   },
+  warningEmoji: {
+    fontSize: 40,
+  }
 });
 
 //Components could be unloaded and loaded and we will loose the users currentIndex, we can persist it here.
@@ -481,7 +486,7 @@ export default class SwipeCards extends Component {
 function Warning() {
   return (
       <View style={styles.warning}>
-        <Emoji name="hand" />
+        <Emoji name="hand" style={styles.warningEmoji} />
         <View style={styles.warningTextWrapper}>
           <Text style={styles.warningText}>You put this contact in the delete pile before. </Text>
           <Text style={styles.warningText}>Swiping left keeps it there, swipe right to save it!</Text>
