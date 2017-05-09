@@ -17,7 +17,7 @@ import colors from '../../utils/colors';
 import Defaults from './Defaults.js';
 import Emoji from 'react-native-emoji';
 
-const SWIPE_THRESHOLD = 120;
+const SWIPE_THRESHOLD = 60;
 
 const styles = StyleSheet.create({
   container: {
