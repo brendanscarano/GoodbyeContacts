@@ -44,6 +44,7 @@ const DELETE_CONFIRMATION = 'DELETE_CONFIRMATION';
 )
 export default class App extends Component {
     componentDidMount() {
+        console.log("this.props.contacts", this.props.contacts);
         this.props.fetchContacts();
     }
 
