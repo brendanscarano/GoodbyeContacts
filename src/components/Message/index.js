@@ -5,7 +5,6 @@ import { possibleYesBlocks, possibleDeniedBlocks } from '../../data/messages';
 import colors from '../../utils/colors';
 
 export default function Message(props) {
-    // console.log("props", props);
     return (
         <View style={styles.messageWrapper}>
             <Text style={{fontSize: 50}}>

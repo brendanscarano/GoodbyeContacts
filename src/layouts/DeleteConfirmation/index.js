@@ -10,7 +10,6 @@ import RNRestart from 'react-native-restart';
 import styles from './styles';
 
 export default function DeleteContacts(props) {
-    console.log("props", props);
     return (
         <View style={styles.container}>
 

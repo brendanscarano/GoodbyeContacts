@@ -71,13 +71,10 @@ export default class DeleteContacts extends Component {
 }
 
 function deleteContacts(contacts) {
-    console.log("contacts", contacts);
     AsyncStorage.multiSet([
         ['contactsToDeleteArray', JSON.stringify([])]
     ]).then(res => {
         contacts.forEach(contact => {
-            console.log("contact", contact);
-
             Contacts.deleteContact(
                 { recordID: contact.recordID },
                 err => console.log(err)

@@ -105,8 +105,6 @@ export function updateCurrentIndex(currentContactPosition) {
     }
 }
 export function removeContactToBeDeleted(contactsToDelete, contactID) {
-    console.log("contactsToDelete", contactsToDelete);
-    console.log("contactID", contactID);
     const newContactIDsToDelete = contactsToDelete
         .map(contact => contact.recordID)
         .filter(recordID => recordID !== contactID)

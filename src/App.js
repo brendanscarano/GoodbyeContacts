@@ -26,7 +26,7 @@ const DELETE_CONFIRMATION = 'DELETE_CONFIRMATION';
 
 @connect(
     state => {
-        console.log('state in connect', state)
+        // console.log('state in connect', state)
         return ({
             loaded: state.contactsReducer.loaded,
             loading: state.contactsReducer.loading,
@@ -46,18 +46,6 @@ export default class App extends Component {
     componentDidMount() {
         this.props.fetchContacts();
     }
-
-    // shouldComponentUpdate(nextProps, nextState) {
-    //         console.log("this.props.contactsToDeleteIDs", this.props.contactsToDeleteIDs);
-    //     console.log("nextProps", nextProps);
-    //     console.log("nextState", nextState);
-
-    //     if (this.props.contactsToDeleteIDs.length === nextProps.contactsToDeleteIDs.length) {
-    //         return false;
-    //     }
-    //     return true;
-
-    // }
 
     handleNope = ({ recordID }) => {
         if (this.props.contactsToDeleteIDs.includes(recordID)) {
@@ -90,7 +78,6 @@ export default class App extends Component {
     }
 
     renderScene = (route, navigator) => {
-        console.log("route", route);
         if (route.name === CARDS_SCREEN) {
             return <Cards
                         navigator={navigator}

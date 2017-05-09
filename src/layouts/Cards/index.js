@@ -64,7 +64,6 @@ function randomNumber(array) {
 }
 
 function NoMoreCards(props) {
-    console.log("props", props);
     return (
         <View style={styles.noMoreCardsWrapper}>
             <Text style={styles.noMoreContactsText}>There are no more contacts left!</Text>
