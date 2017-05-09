@@ -60,6 +60,7 @@ export default class DeleteContacts extends Component {
                     <TouchableHighlight
                         onPress={this.goBack}
                         style={styles.backButtonWrapper}
+                        underlayColor={colors.gray[5]}
                     >
                         <Text style={styles.backButtonWrapperText}>Back to Contacts</Text>
                     </TouchableHighlight>
@@ -92,6 +93,7 @@ function DeleteButton(props) {
         <TouchableHighlight
             style={props.numberOfContacts > 0 ? styles.buttonWrapper : styles.notClickableButtonWrapper}
             onPress={props.onPress}
+            underlayColor={colors.darkThunderRed}
         >
             <Text style={styles.buttonText}>{`Permenantly Delete ${props.numberOfContacts} ${text}`}</Text>
         </TouchableHighlight>

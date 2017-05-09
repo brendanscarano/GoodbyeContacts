@@ -489,7 +489,7 @@ function Warning() {
         <Emoji name="hand" style={styles.warningEmoji} />
         <View style={styles.warningTextWrapper}>
           <Text style={styles.warningText}>You put this contact in the delete pile before. </Text>
-          <Text style={styles.warningText}>Swiping left keeps it there, swipe right to save it!</Text>
+          <Text style={styles.warningText}>Swiping left keeps it there, swipe right to undo it!</Text>
         </View>
       </View>
   )

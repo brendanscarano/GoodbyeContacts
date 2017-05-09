@@ -5,6 +5,7 @@ export default {
     bottomNavCircle: '#232323',
     instagramRed: '#E41938',
     thunderRed: '#D91E18',
+    darkThunderRed: '#ad1813',
     yellow: '#EDD834',
     green: '#18d97f',
     darkGreen: '#44be9e',
