@@ -164,7 +164,6 @@ export default class SwipeCards extends Component {
           this.props.onClickHandler(this.state.card)
         }
 
-        console.log("vx", vx);
         if (vx > 0) {
           velocity = clamp(vx, 3, 5);
         } else if (vx < 0) {
