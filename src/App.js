@@ -15,7 +15,6 @@ import {
 } from './redux/module';
 import RNRestart from 'react-native-restart';
 
-import Contacts from 'react-native-contacts';
 import Cards from './layouts/Cards';
 import DeleteContacts from './layouts/DeleteContacts';
 import DeleteConfirmation from './layouts/DeleteConfirmation';
