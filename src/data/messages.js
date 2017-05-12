@@ -29,13 +29,18 @@ const possibleYesBlocks = [
   {text: 'If you like then you sure to put a ring on it', emoji: 'ring'},
   {text: 'This contact\'s heart will go on', emoji: 'ship'},
   {text: 'To infinity, and beyond!', emoji: 'rocket'},
+  {text: 'Well I\'ll be', emoji: 'flushed'},
+  {text: 'Oh really', emoji: 'open_mouth'},
+  {text: 'Thank you!', emoji: 'blush'},
+  {text: 'That\'s what I thought', emoji: 'smiling_img'},
+  {text: 'That\'s what I thought', emoji: 'innocent'},
 ]
 
 const possibleDeniedBlocks = [
   {text: 'Goodbye', emoji: 'wave'},
   {text: 'Addio', emoji: 'flag-it'},
   {text: 'Au Revoir', emoji: 'flag-fr'},
-  {text: 'Hasta la vista, Baby', emoji: 'robot_face'},
+  {text: 'Hasta la vista, baby', emoji: 'robot_face'},
   {text: 'So long, King Bowser!', emoji: 'mushroom'},
   {text: 'Say goodnight to the bad guy', emoji: 'gun'},
   {text: 'Long live, the king!', emoji: 'lion_face'},
@@ -54,6 +59,10 @@ const possibleDeniedBlocks = [
   {text: 'Well this is a load of...', emoji: 'hankey'},
   {text: 'Austin 3:16 says...', emoji: 'skull'},
   {text: 'This contact is leaving the station', emoji: 'steam_locomotive'},
+  {text: 'Won\'t be seeing you again', emoji: 'see_no_evil'},
+  {text: 'Won\'t be hearing from you again', emoji: 'hear_no_evil'},
+  {text: 'Won\'t be speaking with you again', emoji: 'speak_no_evil'},
+  {text: 'Say it aint so', emoji: 'crying_cat_face'},
 ]
 
 export {
