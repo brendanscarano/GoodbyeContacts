@@ -17,7 +17,8 @@ import colors from '../../utils/colors';
 import Defaults from './Defaults.js';
 import Emoji from 'react-native-emoji';
 
-const SWIPE_THRESHOLD = 60;
+const SWIPE_THRESHOLD = 120;
+const VX_THRESHOLD = .1;
 
 const styles = StyleSheet.create({
   container: {
@@ -163,45 +164,44 @@ export default class SwipeCards extends Component {
           this.props.onClickHandler(this.state.card)
         }
 
+        console.log("vx", vx);
         if (vx > 0) {
           velocity = clamp(vx, 3, 5);
         } else if (vx < 0) {
           velocity = clamp(vx * -1, 3, 5) * -1;
         }
 
-        if (Math.abs(this.state.pan.x._value) > SWIPE_THRESHOLD) {
-
-          let cancelled = false;
-
-          if (this.state.pan.x._value > 0) {
-            cancelled = this.props.handleYup(this.state.card);
-          } else {
-            cancelled = this.props.handleNope(this.state.card);
-          }
-
-          //Yup or nope was cancelled, return the card to normal.
-          if (cancelled) {
-            this._resetPan();
-            return;
-          };
-
-          this.props.cardRemoved(currentIndex[this.guid]);
-
-          this.cardAnimation = Animated.decay(this.state.pan, {
-            velocity: { x: velocity, y: vy },
-            deceleration: 0.98
-          });
-          this.cardAnimation.start(status => {
-            if (status.finished) this._advanceState();
-            else this._resetState();
-
-            this.cardAnimation = null;
-          }
-          );
-
-        } else {
-          this._resetPan();
+        if (Math.abs(this.state.pan.x._value) < SWIPE_THRESHOLD || Math.abs(vx) < VX_THRESHOLD) {
+            return this._resetPan();
         }
+
+        let cancelled = false;
+
+        if (this.state.pan.x._value > 0) {
+          cancelled = this.props.handleYup(this.state.card);
+        } else {
+          cancelled = this.props.handleNope(this.state.card);
+        }
+
+        //Yup or nope was cancelled, return the card to normal.
+        if (cancelled) {
+          this._resetPan();
+          return;
+        };
+
+        this.props.cardRemoved(currentIndex[this.guid]);
+
+        this.cardAnimation = Animated.decay(this.state.pan, {
+          velocity: { x: velocity, y: vy },
+          deceleration: 0.98
+        });
+        this.cardAnimation.start(status => {
+          if (status.finished) this._advanceState();
+          else this._resetState();
+
+          this.cardAnimation = null;
+        });
+
       }
     });
   }
