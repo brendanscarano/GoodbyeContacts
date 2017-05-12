@@ -25,7 +25,6 @@ const DELETE_CONFIRMATION = 'DELETE_CONFIRMATION';
 
 @connect(
     state => {
-        // console.log('state in connect', state)
         return ({
             loaded: state.contactsReducer.loaded,
             loading: state.contactsReducer.loading,
@@ -43,7 +42,6 @@ const DELETE_CONFIRMATION = 'DELETE_CONFIRMATION';
 )
 export default class App extends Component {
     componentDidMount() {
-        console.log("this.props.contacts", this.props.contacts);
         this.props.fetchContacts();
     }
 
